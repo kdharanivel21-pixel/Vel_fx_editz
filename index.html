@@ -67,27 +67,25 @@ background:#000;
 box-shadow:
 0 0 20px #00ffff,
 0 0 40px #ff00ff;
-transition:0.4s;
-margin-bottom:20px;
+animation:float 3s ease-in-out infinite;
 }
 
-.logo:hover{
-transform:scale(1.05);
+@keyframes float{
+0%{
+transform:translateY(0);
+}
+50%{
+transform:translateY(-10px);
+}
+100%{
+transform:translateY(0);
+}
 }
 
 header h1{
 font-size:48px;
+margin-top:20px;
 text-shadow:0 0 20px cyan;
-animation:zoom 2s infinite alternate;
-}
-
-@keyframes zoom{
-0%{
-transform:scale(1);
-}
-100%{
-transform:scale(1.05);
-}
 }
 
 header p{
@@ -99,16 +97,14 @@ margin-bottom:25px;
 /* FOLLOW BUTTON */
 
 .follow-btn{
-display:inline-flex;
-align-items:center;
-gap:10px;
-padding:14px 28px;
+display:inline-block;
+padding:14px 32px;
 background:#0095f6;
 color:white;
 text-decoration:none;
 font-size:18px;
 font-weight:bold;
-border-radius:12px;
+border-radius:14px;
 box-shadow:
 0 0 15px #0095f6,
 0 0 30px #0095f688;
@@ -119,10 +115,6 @@ animation:pulse 2s infinite;
 .follow-btn:hover{
 transform:scale(1.08);
 background:#1877f2;
-}
-
-.follow-btn:active{
-transform:scale(0.92);
 }
 
 @keyframes pulse{
@@ -142,10 +134,7 @@ transform:scale(1);
 .search-box{
 display:flex;
 justify-content:center;
-align-items:center;
-margin-top:40px;
-padding:10px;
-flex-wrap:wrap;
+margin:40px 20px;
 }
 
 .search-box input{
@@ -155,6 +144,8 @@ border:none;
 outline:none;
 font-size:18px;
 border-radius:12px 0 0 12px;
+background:#111;
+color:white;
 }
 
 .search-box button{
@@ -170,19 +161,29 @@ transition:0.3s;
 }
 
 .search-box button:hover{
-transform:scale(1.1);
 background:#ff00ff;
 color:white;
 }
 
-/* RESULTS */
+/* SECTION TITLE */
 
-#results{
+.section-title{
+text-align:center;
+font-size:40px;
+margin-top:50px;
+margin-bottom:30px;
+color:#00ffff;
+text-shadow:0 0 20px #00ffff;
+}
+
+/* CARD AREA */
+
+.card-area{
 display:flex;
 flex-wrap:wrap;
 justify-content:center;
 gap:30px;
-padding:40px;
+padding:20px;
 }
 
 /* CARD */
@@ -241,7 +242,7 @@ color:#ccc;
 margin-bottom:20px;
 }
 
-/* OPEN BUTTON */
+/* BUTTONS */
 
 .open-btn{
 display:inline-block;
@@ -261,6 +262,25 @@ background:#00ffff;
 color:black;
 }
 
+.copy-btn{
+padding:14px 25px;
+border:none;
+background:linear-gradient(45deg,#00ffff,#ff00ff);
+color:white;
+font-size:16px;
+font-weight:bold;
+border-radius:12px;
+cursor:pointer;
+transition:0.3s;
+box-shadow:
+0 0 15px #00ffff,
+0 0 25px #ff00ff;
+}
+
+.copy-btn:hover{
+transform:scale(1.1);
+}
+
 /* PROMPT BOX */
 
 .prompt-box{
@@ -275,39 +295,12 @@ font-size:15px;
 margin-bottom:20px;
 outline:none;
 resize:none;
-box-shadow:0 0 15px #00ffff55;
-}
-
-/* COPY BUTTON */
-
-.copy-btn{
-padding:14px 25px;
-border:none;
-background:linear-gradient(45deg,#00ffff,#ff00ff);
-color:white;
-font-size:16px;
-font-weight:bold;
-border-radius:12px;
-cursor:pointer;
-transition:0.3s;
-box-shadow:
-0 0 15px #00ffff,
-0 0 25px #ff00ff;
-animation:pulse 2s infinite;
-}
-
-.copy-btn:hover{
-transform:scale(1.1);
-}
-
-.copy-btn:active{
-transform:scale(0.9);
 }
 
 /* FOOTER */
 
 footer{
-margin-top:50px;
+margin-top:60px;
 padding:20px;
 text-align:center;
 background:#111;
@@ -333,8 +326,8 @@ header h1{
 font-size:34px;
 }
 
-.search-box input{
-width:220px;
+.section-title{
+font-size:30px;
 }
 
 .card{
@@ -345,9 +338,8 @@ width:95%;
 height:280px;
 }
 
-.follow-btn{
-font-size:16px;
-padding:12px 20px;
+.search-box input{
+width:200px;
 }
 
 }
@@ -362,19 +354,19 @@ padding:12px 20px;
 <img
 class="logo"
 src="my logo Vel_fx_edit.png"
-alt="VEL_FX_EDIT Logo"
+alt="Logo"
 >
 
 <h1>Vel_fx_edit</h1>
 
-<p>Instagram Alight Motion Editing Website</p>
+<p>Instagram Alight Motion & AI Prompt Website</p>
 
 <a
 class="follow-btn"
 href="https://www.instagram.com/Vel_fx_edit/"
 target="_blank">
 
-FOLLOW 
+FOLLOW
 
 </a>
 
@@ -390,15 +382,44 @@ id="searchInput"
 placeholder="Search here"
 />
 
-<button onclick="searchVideo()">
+<button onclick="searchItems()">
 SEARCH
 </button>
 
 </div>
 
-<!-- RESULTS -->
+<!-- ALIGHT MOTION -->
 
-<div id="results"></div>
+<h2 class="section-title">
+🔥 ALIGHT MOTION PROJECTS 🔥
+</h2>
+
+<div
+id="videoResults"
+class="card-area">
+</div>
+
+<!-- BOY PROMPTS -->
+
+<h2 class="section-title">
+🧑 BOY AI PROMPTS 🧑
+</h2>
+
+<div
+id="boyPromptResults"
+class="card-area">
+</div>
+
+<!-- GIRL PROMPTS -->
+
+<h2 class="section-title">
+👧 GIRL AI PROMPTS 👧
+</h2>
+
+<div
+id="girlPromptResults"
+class="card-area">
+</div>
 
 <!-- FOOTER -->
 
@@ -407,6 +428,7 @@ SEARCH
 <p>Created By Dharanivel</p>
 
 <p>
+
 Instagram :
 
 <a
@@ -424,7 +446,7 @@ target="_blank">
 
 <script>
 
-/* DATABASE */
+/* ================= ALIGHT MOTION ================= */
 
 const videos = [
 
@@ -433,82 +455,77 @@ code:"B01",
 title:"Boy Birthday Edit",
 thumbnail:"Thumnail1.png",
 description:"Amazing Birthday Edit",
-link:"https://alightcreative.com/am/share/u/dnwk7emVc6NgGq5ftKToRPNXzyr2/p/zJocumoeJX-585f9f843e676995"
+link:"https://alightcreative.com/"
 },
 
 {
-code:"PR01",
-title:"AI PROMPT PACK",
-thumbnail:"Ai prompt thumnail1.jpeg",
-description:"Best AI Prompt Collection",
-type:"prompt",
-
-prompt:`ULTRA-REALISTIC 8K CINEMATIC TAMIL MOVIE POSTER OF A STYLISH YOUNG SOUTH INDIAN MAN SITTING CENTRALLY ON ROUGH STONE STEPS IN A POWERFUL, DOMINANT POSE. USE THE EXACT FACE FROM THE UPLOADED IMAGE WITH HIGHLY ACCURATE FACE RESEMBLANCE, NATURAL SKIN TEXTURE, SHARP JAWLINE, REALISTIC EYES, CLEAN FACIAL DETAILS, SHORT STYLISH HAIR VISIBLE CLEARLY FROM THE FRONT, HAIR NOT COVERING THE FOREHEAD, PROPER HEAD ALIGNMENT, NATURAL EXPRESSION, AND CINEMATIC LIGHTING ON THE FACE. HE WEARS A DARK MAROON FULL-SLEEVE SHIRT WITH ROLLED-UP SLEEVES AND A DARK GREEN DHOTI WITH GOLDEN BORDER. ONE LEG IS PLACED HIGHER ON THE STEP WITH A MASS LEADER ATTITUDE. HE LOOKS SLIGHTLY SIDEWAYS WITH A SERIOUS, INTENSE EXPRESSION. AND A WATCH. SURROUNDING HIM ARE FOUR TERRIFYING KARUPPU SAMI DEVOTEES. THEIR BODIES ARE COMPLETELY PAINTED MATTE CHARCOAL BLACK WITH HYPER-DETAILED SKIN TEXTURE. THEIR FACES HAVE AGGRESSIVE WHITE AND RED CEREMONIAL PAINT WITH LARGE EYES, SHARP TEETH, AND LONG TONGUES STICKING OUT. THEY WEAR HUGE GARLANDS MADE OF YELLOW LEMONS, MARIGOLDS, RUDRAKSHA BEADS, AND SILVER ANKLE BELLS. EACH HOLDS A MASSIVE CURVED SILVER ARUVAL UPRIGHT. TWO SIT BESIDE THE HERO ON LOWER STEPS AND TWO STAND BEHIND HIM IN AN INTIMIDATING PROTECTIVE FORMATION. BACKGROUND FILLED WITH BLOOD-RED MIST, FIRE EMBERS, TEMPLE ATMOSPHERE, DARK SHADOWS, VOLUMETRIC RED FOG, CINEMATIC DUST PARTICLES, AND EPIC CONTRAST. A HUGE STONE STATUE OF A DEITY RIDING A HORSE IS VISIBLE IN THE BACKGROUND THROUGH THE RED SMOKE. ADD TEMPLE TRIDENTS, FIRE TORCHES, AND TRADITIONAL TAMIL FOLK ELEMENTS FOR A DIVINE MASS LOOK. DRAMATIC MOODY LIGHTING, HYPER-DETAILED FABRIC TEXTURES, EPIC SCALE COMPOSITION, CINEMATIC RED-AND-BLACK COLOR GRADING, ULTRA SHARP DETAILS, DEPTH OF FIELD, HIGH CONTRAST, MOVIE POSTER STYLE. AT THE BOTTOM CENTER, ADD LARGE STYLIZED TAMIL TITLE TEXT “கருப்பு” IN A METALLIC GOLDEN COLOR WITH BRUSHSTROKE CALLIGRAPHY STYLE, GLOWING EDGES, AND CINEMATIC SHADOW. VERTICAL POSTER, 3:4 ASPECT RATIO, ULTRA-HD, MASTERPIECE QUALITY, CINEMATIC COMPOSITION, REALISTIC FACE SWAP, PROFESSIONAL MOVIE POSTER FINISH.`,
-
-link:"#"
+code:"B02",
+title:"Girl Birthday Edit",
+thumbnail:"Girl birthdat thumnail3.jpeg",
+description:"New Reel Editing Project",
+link:"https://alightcreative.com/am/share/u/dnwk7emVc6NgGq5ftKToRPNXzyr2/p/z1VhQGOnjk-7afa5f713fc3d4f4"
 }
 
 ];
 
-/* DISPLAY */
+/* ================= BOY PROMPTS ================= */
+
+const boyPrompts = [
+
+{
+code:"BPR01",
+title:"Boy Karuppu Mass Poster",
+thumbnail:"Ai prompt thumnail1.jpeg",
+
+prompt:`ULTRA-REALISTIC 8K CINEMATIC TAMIL MOVIE POSTER OF A STYLISH YOUNG SOUTH INDIAN MAN SITTING CENTRALLY ON ROUGH STONE STEPS IN A POWERFUL, DOMINANT POSE. USE THE EXACT FACE FROM THE UPLOADED IMAGE WITH HIGHLY ACCURATE FACE RESEMBLANCE, NATURAL SKIN TEXTURE, SHARP JAWLINE, REALISTIC EYES, CLEAN FACIAL DETAILS, SHORT STYLISH HAIR VISIBLE CLEARLY FROM THE FRONT, HAIR NOT COVERING THE FOREHEAD, PROPER HEAD ALIGNMENT, NATURAL EXPRESSION, AND CINEMATIC LIGHTING ON THE FACE. HE WEARS A DARK MAROON FULL-SLEEVE SHIRT WITH ROLLED-UP SLEEVES AND A DARK GREEN DHOTI WITH GOLDEN BORDER. ONE LEG IS PLACED HIGHER ON THE STEP WITH A MASS LEADER ATTITUDE. HE LOOKS SLIGHTLY SIDEWAYS WITH A SERIOUS, INTENSE EXPRESSION. AND A WATCH. SURROUNDING HIM ARE FOUR TERRIFYING KARUPPU SAMI DEVOTEES. THEIR BODIES ARE COMPLETELY PAINTED MATTE CHARCOAL BLACK WITH HYPER-DETAILED SKIN TEXTURE. THEIR FACES HAVE AGGRESSIVE WHITE AND RED CEREMONIAL PAINT WITH LARGE EYES, SHARP TEETH, AND LONG TONGUES STICKING OUT. THEY WEAR HUGE GARLANDS MADE OF YELLOW LEMONS, MARIGOLDS, RUDRAKSHA BEADS, AND SILVER ANKLE BELLS. EACH HOLDS A MASSIVE CURVED SILVER ARUVAL UPRIGHT. TWO SIT BESIDE THE HERO ON LOWER STEPS AND TWO STAND BEHIND HIM IN AN INTIMIDATING PROTECTIVE FORMATION. BACKGROUND FILLED WITH BLOOD-RED MIST, FIRE EMBERS, TEMPLE ATMOSPHERE, DARK SHADOWS, VOLUMETRIC RED FOG, CINEMATIC DUST PARTICLES, AND EPIC CONTRAST. A HUGE STONE STATUE OF A DEITY RIDING A HORSE IS VISIBLE IN THE BACKGROUND THROUGH THE RED SMOKE. ADD TEMPLE TRIDENTS, FIRE TORCHES, AND TRADITIONAL TAMIL FOLK ELEMENTS FOR A DIVINE MASS LOOK. DRAMATIC MOODY LIGHTING, HYPER-DETAILED FABRIC TEXTURES, EPIC SCALE COMPOSITION, CINEMATIC RED-AND-BLACK COLOR GRADING, ULTRA SHARP DETAILS, DEPTH OF FIELD, HIGH CONTRAST, MOVIE POSTER STYLE. AT THE BOTTOM CENTER, ADD LARGE STYLIZED TAMIL TITLE TEXT “கருப்பு” IN A METALLIC GOLDEN COLOR WITH BRUSHSTROKE CALLIGRAPHY STYLE, GLOWING EDGES, AND CINEMATIC SHADOW. VERTICAL POSTER, 3:4 ASPECT RATIO, ULTRA-HD, MASTERPIECE QUALITY, CINEMATIC COMPOSITION, REALISTIC FACE SWAP, PROFESSIONAL MOVIE POSTER FINISH.`
+
+},
+
+{
+code:"BPR02",
+title:"Son amma Prompt",
+thumbnail:"Boy ai prompt2.jpeg",
+
+prompt:`gradient studio background, professional softbox lighting, golden-hour rim light, soft shadows, creamy depth of field, ultra realistic skin details, cinematic brown and gold color grading, premium family portrait photography style, emotional bonding, clean centered composition, 85mm lens look, shallow depth of field, realistic fabric textures, warm cozy atmosphere, luxury portrait aesthetic, studio-quality retouching, elegant Tamil typography on left side saying "நான் பார்த்த முதல் முகம் நீ நான் கேட்ட முதல் குரல் நீ" in stylish golden calligraphy with decorative ornaments, 8K ultra realistic, timeless emotional portrait.3:4         `
+
+}
+
+];
+
+/* ================= GIRL PROMPTS ================= */
+
+const girlPrompts = [
+
+{
+code:"GPR01",
+title:"Girl Karuppu Poster",
+thumbnail:"Girl Ai prompt thumnail1.jpeg",
+
+prompt:`ULTRA-REALISTIC 8K CINEMATIC TAMIL MOVIE POSTER OF A STYLISH YOUNG SOUTH INDIAN WOMEN SITTING CENTRALLY ON ROUGH STONE STEPS IN A POWERFUL, DOMINANT POSE. USE THE EXACT FACE FROM THE UPLOADED IMAGE WITH HIGHLY ACCURATE FACE RESEMBLANCE, NATURAL SKIN TEXTURE, SHARP JAWLINE, REALISTIC EYES, CLEAN FACIAL DETAILS, SHORT STYLISH HAIR VISIBLE CLEARLY FROM THE FRONT, HAIR NOT COVERING THE FOREHEAD, PROPER HEAD ALIGNMENT, NATURAL EXPRESSION, AND CINEMATIC LIGHTING ON THE FACE. HE WEARS A DARK MAROON FULL-SLEEVE SHIRT WITH ROLLED-UP SLEEVES AND A DARK GREEN DHOTI WITH GOLDEN BORDER. ONE LEG IS PLACED HIGHER ON THE STEP WITH A MASS LEADER ATTITUDE. HE LOOKS SLIGHTLY SIDEWAYS WITH A SERIOUS, INTENSE EXPRESSION AND A WATCH. SURROUNDING HIM ARE FOUR TERRIFYING KARUPPU SAMI DEVOTEES. THEIR BODIES ARE COMPLETELY PAINTED MATTE CHARCOAL BLACK WITH HYPER-DETAILED SKIN TEXTURE. THEIR FACES HAVE AGGRESSIVE WHITE AND RED CEREMONIAL PAINT WITH LARGE EYES, SHARP TEETH, AND LONG TONGUES STICKING OUT. THEY WEAR HUGE GARLANDS MADE OF YELLOW LEMONS, MARIGOLDS, RUDRAKSHA BEADS, AND SILVER ANKLE BELLS. EACH HOLDS A MASSIVE CURVED SILVER ARUVAL UPRIGHT. TWO SIT BESIDE THE HERO ON LOWER STEPS AND TWO STAND BEHIND HIM IN AN INTIMIDATING PROTECTIVE FORMATION. BACKGROUND FILLED WITH BLOOD-RED MIST, FIRE EMBERS, TEMPLE ATMOSPHERE, DARK SHADOWS, VOLUMETRIC RED FOG, CINEMATIC DUST PARTICLES, AND EPIC CONTRAST. A HUGE STONE STATUE OF A DEITY RIDING A HORSE IS VISIBLE IN THE BACKGROUND THROUGH THE RED SMOKE. ADD TEMPLE TRIDENTS, FIRE TORCHES, AND TRADITIONAL TAMIL FOLK ELEMENTS FOR A DIVINE MASS LOOK. DRAMATIC MOODY LIGHTING, HYPER-DETAILED FABRIC TEXTURES, EPIC SCALE COMPOSITION, CINEMATIC RED-AND-BLACK COLOR GRADING, ULTRA SHARP DETAILS, DEPTH OF FIELD, HIGH CONTRAST, MOVIE POSTER STYLE. AT THE BOTTOM CENTER, ADD LARGE STYLIZED TAMIL TITLE TEXT “கருப்பு” IN A METALLIC GOLDEN COLOR WITH BRUSHSTROKE CALLIGRAPHY STYLE, GLOWING EDGES, AND CINEMATIC SHADOW. VERTICAL POSTER, 3:4 ASPECT RATIO, ULTRA-HD, MASTERPIECE QUALITY, CINEMATIC COMPOSITION, REALISTIC FACE SWAP, PROFESSIONAL MOVIE POSTER FINISH.`
+
+},
+
+{
+code:"GPR02",
+title:"Gaughter amma Prompt",
+thumbnail:"Girl Ai prompt thumnail2.jpeg",
+
+prompt:`traditional styling. The daughter stands closely beside her with a loving arm around her shoulder, wearing a beautiful white and gold salwar suit (white chudi with elegant golden embroidery and detailing), long soft hair, natural makeup, graceful expression, and genuine family warmth. Dark warm brown gradient studio background, professional softbox lighting, golden-hour rim light, soft shadows, creamy depth of field, ultra realistic skin details, cinematic brown and gold color grading, premium family portrait photography style, emotional bonding, clean centered composition, 85mm lens look, shallow depth of field, realistic fabric textures, warm cozy atmosphere, luxury portrait aesthetic, studio-quality retouching, elegant Tamil typography on left side saying “நான் பார்த்த முதல் முகம் நீ நான் கேட்ட முதல் குரல் நீ” in stylish golden calligraphy with decorative ornaments, 8K ultra realistic, timeless emotional portrait, 3:4 aspect ratio.`
+
+}
+
+];
+
+/* ================= DISPLAY VIDEOS ================= */
 
 function displayVideos(list){
 
 const results =
-document.getElementById("results");
+document.getElementById("videoResults");
 
 results.innerHTML = "";
 
-if(list.length === 0){
-
-results.innerHTML =
-"<h2 style='color:#ff00ff'>No Project Found</h2>";
-
-return;
-}
-
 list.forEach(video => {
-
-/* PROMPT CARD */
-
-if(video.type === "prompt"){
-
-results.innerHTML += `
-
-<div class="card">
-
-<img src="${video.thumbnail}">
-
-<div class="card-content">
-
-<h2>${video.code}</h2>
-
-<p>${video.title}</p>
-
-<textarea
-id="${video.code}"
-class="prompt-box"
-readonly>${video.prompt}</textarea>
-
-<button
-class="copy-btn"
-onclick="copyPrompt('${video.code}')">
-
-COPY PROMPT
-
-</button>
-
-</div>
-
-</div>
-
-`;
-
-}
-
-/* VIDEO CARD */
-
-else{
 
 results.innerHTML += `
 
@@ -537,15 +554,105 @@ OPEN PROJECT
 
 `;
 
+});
+
 }
+
+/* ================= DISPLAY BOY PROMPTS ================= */
+
+function displayBoyPrompts(list){
+
+const results =
+document.getElementById("boyPromptResults");
+
+results.innerHTML = "";
+
+list.forEach(prompt => {
+
+results.innerHTML += `
+
+<div class="card">
+
+<img src="${prompt.thumbnail}">
+
+<div class="card-content">
+
+<h2>${prompt.code}</h2>
+
+<p>${prompt.title}</p>
+
+<textarea
+id="${prompt.code}"
+class="prompt-box"
+readonly>${prompt.prompt}</textarea>
+
+<button
+class="copy-btn"
+onclick="copyPrompt('${prompt.code}')">
+
+COPY PROMPT
+
+</button>
+
+</div>
+
+</div>
+
+`;
 
 });
 
 }
 
-/* SEARCH */
+/* ================= DISPLAY GIRL PROMPTS ================= */
 
-function searchVideo(){
+function displayGirlPrompts(list){
+
+const results =
+document.getElementById("girlPromptResults");
+
+results.innerHTML = "";
+
+list.forEach(prompt => {
+
+results.innerHTML += `
+
+<div class="card">
+
+<img src="${prompt.thumbnail}">
+
+<div class="card-content">
+
+<h2>${prompt.code}</h2>
+
+<p>${prompt.title}</p>
+
+<textarea
+id="${prompt.code}"
+class="prompt-box"
+readonly>${prompt.prompt}</textarea>
+
+<button
+class="copy-btn"
+onclick="copyPrompt('${prompt.code}')">
+
+COPY PROMPT
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+/* ================= SEARCH ================= */
+
+function searchItems(){
 
 let input =
 document.getElementById("searchInput")
@@ -554,20 +661,34 @@ document.getElementById("searchInput")
 if(input === ""){
 
 displayVideos(videos);
+displayBoyPrompts(boyPrompts);
+displayGirlPrompts(girlPrompts);
 
 return;
 }
 
-const filtered =
+const filteredVideos =
 videos.filter(video =>
 video.code.includes(input)
 );
 
-displayVideos(filtered);
+const filteredBoyPrompts =
+boyPrompts.filter(prompt =>
+prompt.code.includes(input)
+);
+
+const filteredGirlPrompts =
+girlPrompts.filter(prompt =>
+prompt.code.includes(input)
+);
+
+displayVideos(filteredVideos);
+displayBoyPrompts(filteredBoyPrompts);
+displayGirlPrompts(filteredGirlPrompts);
 
 }
 
-/* COPY */
+/* ================= COPY ================= */
 
 function copyPrompt(id){
 
@@ -580,9 +701,11 @@ alert("Prompt Copied!");
 
 }
 
-/* FIRST LOAD */
+/* ================= FIRST LOAD ================= */
 
 displayVideos(videos);
+displayBoyPrompts(boyPrompts);
+displayGirlPrompts(girlPrompts);
 
 </script>
 
