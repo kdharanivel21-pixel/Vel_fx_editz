@@ -372,8 +372,6 @@ FOLLOW
 
 </header>
 
-<!-- SEARCH -->
-
 <div class="search-box">
 
 <input
@@ -388,8 +386,6 @@ SEARCH
 
 </div>
 
-<!-- ALIGHT MOTION -->
-
 <h2 class="section-title">
 🔥 ALIGHT MOTION PROJECTS 🔥
 </h2>
@@ -399,7 +395,14 @@ id="videoResults"
 class="card-area">
 </div>
 
-<!-- BOY PROMPTS -->
+<h2 class="section-title">
+🧑‍🤝‍🧑 BOTH BOY AND GIRLS 🧑‍🤝‍🧑
+</h2>
+
+<div
+id="bothPromptResults"
+class="card-area">
+</div>
 
 <h2 class="section-title">
 🧑 BOY AI PROMPTS 🧑
@@ -410,8 +413,6 @@ id="boyPromptResults"
 class="card-area">
 </div>
 
-<!-- GIRL PROMPTS -->
-
 <h2 class="section-title">
 👧 GIRL AI PROMPTS 👧
 </h2>
@@ -420,8 +421,6 @@ class="card-area">
 id="girlPromptResults"
 class="card-area">
 </div>
-
-<!-- FOOTER -->
 
 <footer>
 
@@ -446,8 +445,11 @@ target="_blank">
 
 <script>
 
-/* ================= ALIGHT MOTION ================= */
+/* =================================================== */
+/* 1. DATA SECTIONS (EASY TO UPGRADE HERE)             */
+/* =================================================== */
 
+/* --- ALIGHT MOTION VIDEOS --- */
 const videos = [
 
 {
@@ -468,282 +470,196 @@ link:"https://alightcreative.com/am/share/u/dnwk7emVc6NgGq5ftKToRPNXzyr2/p/z1VhQ
 
 ];
 
-/* ================= BOY PROMPTS ================= */
+/* --- BOTH BOY AND GIRLS PROMPTS --- */
+const bothPrompts = [
 
+{
+code:"BG01",
+title:"Rowdy Thangachi",
+thumbnail:"rowdythangachi.jpg",
+prompt:`Create a premium ultra-detailed cute chibi-style poster with a clean white to light grey gradient background, in 3:4 aspect ratio. At the top center, add stylish bold typography text: “Rowdy தங்கச்சி Appaavi அண்ணன்..!” — “Rowdy தங்கச்சி” in bright hot pink gradient with soft white outline, glossy 3D effect, and subtle shadow. — “Appaavi அண்ணன்..!” in deep dark purple to black glossy finish with smooth depth. Add small heart doodles, spark accents, decorative pink lines, and cute sticker-style elements around the title. IMPORTANT STYLE INSTRUCTION: Do NOT generate anime face. Do NOT generate cartoon face. Faces must look like real human faces with original facial structure and natural skin texture. Maintain high face accuracy from reference images (original face identity preserved). Only body proportions should be chibi-style (big head, small body), while faces remain realistic and detailed. No exaggerated animated eyes, no cartoon nose, no plastic skin.`
+}
+
+];
+
+/* --- BOY PROMPTS --- */
 const boyPrompts = [
 
 {
 code:"BPR01",
 title:"Boy Karuppu Mass Poster",
 thumbnail:"Ai prompt thumnail1.jpeg",
-
 prompt:`ULTRA-REALISTIC 8K CINEMATIC TAMIL MOVIE POSTER OF A STYLISH YOUNG SOUTH INDIAN MAN SITTING CENTRALLY ON ROUGH STONE STEPS IN A POWERFUL, DOMINANT POSE. USE THE EXACT FACE FROM THE UPLOADED IMAGE WITH HIGHLY ACCURATE FACE RESEMBLANCE, NATURAL SKIN TEXTURE, SHARP JAWLINE, REALISTIC EYES, CLEAN FACIAL DETAILS, SHORT STYLISH HAIR VISIBLE CLEARLY FROM THE FRONT, HAIR NOT COVERING THE FOREHEAD, PROPER HEAD ALIGNMENT, NATURAL EXPRESSION, AND CINEMATIC LIGHTING ON THE FACE. HE WEARS A DARK MAROON FULL-SLEEVE SHIRT WITH ROLLED-UP SLEEVES AND A DARK GREEN DHOTI WITH GOLDEN BORDER. ONE LEG IS PLACED HIGHER ON THE STEP WITH A MASS LEADER ATTITUDE. HE LOOKS SLIGHTLY SIDEWAYS WITH A SERIOUS, INTENSE EXPRESSION. AND A WATCH. SURROUNDING HIM ARE FOUR TERRIFYING KARUPPU SAMI DEVOTEES. THEIR BODIES ARE COMPLETELY PAINTED MATTE CHARCOAL BLACK WITH HYPER-DETAILED SKIN TEXTURE. THEIR FACES HAVE AGGRESSIVE WHITE AND RED CEREMONIAL PAINT WITH LARGE EYES, SHARP TEETH, AND LONG TONGUES STICKING OUT. THEY WEAR HUGE GARLANDS MADE OF YELLOW LEMONS, MARIGOLDS, RUDRAKSHA BEADS, AND SILVER ANKLE BELLS. EACH HOLDS A MASSIVE CURVED SILVER ARUVAL UPRIGHT. TWO SIT BESIDE THE HERO ON LOWER STEPS AND TWO STAND BEHIND HIM IN AN INTIMIDATING PROTECTIVE FORMATION. BACKGROUND FILLED WITH BLOOD-RED MIST, FIRE EMBERS, TEMPLE ATMOSPHERE, DARK SHADOWS, VOLUMETRIC RED FOG, CINEMATIC DUST PARTICLES, AND EPIC CONTRAST. A HUGE STONE STATUE OF A DEITY RIDING A HORSE IS VISIBLE IN THE BACKGROUND THROUGH THE RED SMOKE. ADD TEMPLE TRIDENTS, FIRE TORCHES, AND TRADITIONAL TAMIL FOLK ELEMENTS FOR A DIVINE MASS LOOK. DRAMATIC MOODY LIGHTING, HYPER-DETAILED FABRIC TEXTURES, EPIC SCALE COMPOSITION, CINEMATIC RED-AND-BLACK COLOR GRADING, ULTRA SHARP DETAILS, DEPTH OF FIELD, HIGH CONTRAST, MOVIE POSTER STYLE. AT THE BOTTOM CENTER, ADD LARGE STYLIZED TAMIL TITLE TEXT “கருப்பு” IN A METALLIC GOLDEN COLOR WITH BRUSHSTROKE CALLIGRAPHY STYLE, GLOWING EDGES, AND CINEMATIC SHADOW. VERTICAL POSTER, 3:4 ASPECT RATIO, ULTRA-HD, MASTERPIECE QUALITY, CINEMATIC COMPOSITION, REALISTIC FACE SWAP, PROFESSIONAL MOVIE POSTER FINISH.`
-
 },
 
 {
 code:"BPR02",
 title:"Son amma Prompt",
 thumbnail:"Boy ai prompt2.jpeg",
-
 prompt:`gradient studio background, professional softbox lighting, golden-hour rim light, soft shadows, creamy depth of field, ultra realistic skin details, cinematic brown and gold color grading, premium family portrait photography style, emotional bonding, clean centered composition, 85mm lens look, shallow depth of field, realistic fabric textures, warm cozy atmosphere, luxury portrait aesthetic, studio-quality retouching, elegant Tamil typography on left side saying "நான் பார்த்த முதல் முகம் நீ நான் கேட்ட முதல் குரல் நீ" in stylish golden calligraphy with decorative ornaments, 8K ultra realistic, timeless emotional portrait.3:4`
-
 },
 
 {
 code:"BPR03",
 title:"CM Boy prompt",
 thumbnail:"Boy ai prompt3.jpeg",
-
 prompt:`A highly realistic cinematic photograph of a young man (use the uploaded face exactly, do not alter facial features, identity, or proportions) standing beside a cheif minister JOSEPH VIJAY seated at an official government desk of cheif minister seat. The Chief Minister VIJAY resembles a charismatic South Indian leader wearing a crisp white shirt, sitting in a premium leather chair, smiling warmly while receiving a bouquet of flowers.vijay looking at young man The young man is standing respectfully on the right side, wearing a clean white shirt, giving a polite humble smile slightly leaning forward while handing over a colorful bouquet.the man looking at camera light smile Background features a luxurious government office setup with wooden panels, official desk, Indian flags on both sides, and a large "Government of Tamil Nadu" emblem on the wall behind.Final art 100% same facestructure 3:4.`
-
 },
 
 {
 code:"BPR04",
 title:"Boy ai prompt",
 thumbnail:"Boy ai prompt4.jpeg",
-
 prompt:`Use a real face as a reference photo. The background is the same as in the photo. The lighting is warm, soft, and clean, with subtle shadows. Around the image, add several mini chibi (3D cute style) versions of the character, While maintaining the original facial features. expressions: jumping cheerfully waving sitting relaxed holding a drink cute and playful expressions Add hand-drawn white doodle elements: outline around the main body stars, hearts, sparkles motion lines small cute icons Add aesthetic handwriting such as: “shine,” “bright day,”happy,””smile,”” etc. (casual doodle font) Overall style: clean & aesthetic composition white sticker outline soft pastel color tone high detall 3D chibi glossy look cute Korean style instagrammable. 3:4`
+},
 
-}
+{
+code:"BPR05",
+title:"Boy Potrait casuall",
+thumbnail:"boypotrait.jpg",
+prompt:`Ultra-realistic lifestyle portrait using my uploaded photo as the ONLY facial reference. Preserve my face with 100% accuracy. Recreate the exact pose: sitting casually on the edge of a modern floating bench, legs apart, leaning slightly forward, hands resting naturally on thighs, head slightly tilted, smiling at the camera. Wear an oversized off-white sweatshirt, light neon lime-green baggy cargo pants, white & lime-green Nike Dunk Low sneakers, and a black smartwatch. 3:4 Ratio`
+},
+
+{
+code:"BPR06",
+title:"A highly detailed cinematic portrait.",
+thumbnail:"aestheticboypotrait.jpg",
+prompt:`A highly detailed cinematic portrait of a stylish young man standing outdoors under a soft hazy sky with a warm muted aesthetic. He has thick, voluminous messy black hair covering part of his forehead in a trendy fluffy hairstyle, sharp facial features, a neatly trimmed beard and mustache, and soft glowing skin. He is wearing round black sunglasses, a plain white t-shirt, and a bright yellow oversized jacket with printed text details, left casually open. 3:4.`
+},
 
 ];
 
-/* ================= GIRL PROMPTS ================= */
-
+/* --- GIRL PROMPTS --- */
 const girlPrompts = [
 
 {
 code:"GPR01",
 title:"Girl Karuppu Poster",
 thumbnail:"Girl Ai prompt thumnail1.jpeg",
-
 prompt:`ULTRA-REALISTIC 8K CINEMATIC TAMIL MOVIE POSTER OF A STYLISH YOUNG SOUTH INDIAN WOMEN SITTING CENTRALLY ON ROUGH STONE STEPS IN A POWERFUL, DOMINANT POSE. USE THE EXACT FACE FROM THE UPLOADED IMAGE WITH HIGHLY ACCURATE FACE RESEMBLANCE, NATURAL SKIN TEXTURE, SHARP JAWLINE, REALISTIC EYES, CLEAN FACIAL DETAILS, SHORT STYLISH HAIR VISIBLE CLEARLY FROM THE FRONT, HAIR NOT COVERING THE FOREHEAD, PROPER HEAD ALIGNMENT, NATURAL EXPRESSION, AND CINEMATIC LIGHTING ON THE FACE. HE WEARS A DARK MAROON FULL-SLEEVE SHIRT WITH ROLLED-UP SLEEVES AND A DARK GREEN DHOTI WITH GOLDEN BORDER. ONE LEG IS PLACED HIGHER ON THE STEP WITH A MASS LEADER ATTITUDE. HE LOOKS SLIGHTLY SIDEWAYS WITH A SERIOUS, INTENSE EXPRESSION AND A WATCH. SURROUNDING HIM ARE FOUR TERRIFYING KARUPPU SAMI DEVOTEES. THEIR BODIES ARE COMPLETELY PAINTED MATTE CHARCOAL BLACK WITH HYPER-DETAILED SKIN TEXTURE. THEIR FACES HAVE AGGRESSIVE WHITE AND RED CEREMONIAL PAINT WITH LARGE EYES, SHARP TEETH, AND LONG TONGUES STICKING OUT. THEY WEAR HUGE GARLANDS MADE OF YELLOW LEMONS, MARIGOLDS, RUDRAKSHA BEADS, AND SILVER ANKLE BELLS. EACH HOLDS A MASSIVE CURVED SILVER ARUVAL UPRIGHT. TWO SIT BESIDE THE HERO ON LOWER STEPS AND TWO STAND BEHIND HIM IN AN INTIMIDATING PROTECTIVE FORMATION. BACKGROUND FILLED WITH BLOOD-RED MIST, FIRE EMBERS, TEMPLE ATMOSPHERE, DARK SHADOWS, VOLUMETRIC RED FOG, CINEMATIC DUST PARTICLES, AND EPIC CONTRAST. A HUGE STONE STATUE OF A DEITY RIDING A HORSE IS VISIBLE IN THE BACKGROUND THROUGH THE RED SMOKE. ADD TEMPLE TRIDENTS, FIRE TORCHES, AND TRADITIONAL TAMIL FOLK ELEMENTS FOR A DIVINE MASS LOOK. DRAMATIC MOODY LIGHTING, HYPER-DETAILED FABRIC TEXTURES, EPIC SCALE COMPOSITION, CINEMATIC RED-AND-BLACK COLOR GRADING, ULTRA SHARP DETAILS, DEPTH OF FIELD, HIGH CONTRAST, MOVIE POSTER STYLE. AT THE BOTTOM CENTER, ADD LARGE STYLIZED TAMIL TITLE TEXT “கருப்பு” IN A METALLIC GOLDEN COLOR WITH BRUSHSTROKE CALLIGRAPHY STYLE, GLOWING EDGES, AND CINEMATIC SHADOW. VERTICAL POSTER, 3:4 ASPECT RATIO, ULTRA-HD, MASTERPIECE QUALITY, CINEMATIC COMPOSITION, REALISTIC FACE SWAP, PROFESSIONAL MOVIE POSTER FINISH.`
-
 },
 
 {
 code:"GPR02",
 title:"Gaughter amma Prompt",
 thumbnail:"Girl Ai prompt thumnail2.jpeg",
-
 prompt:`traditional styling. The daughter stands closely beside her with a loving arm around her shoulder, wearing a beautiful white and gold salwar suit (white chudi with elegant golden embroidery and detailing), long soft hair, natural makeup, graceful expression, and genuine family warmth. Dark warm brown gradient studio background, professional softbox lighting, golden-hour rim light, soft shadows, creamy depth of field, ultra realistic skin details, cinematic brown and gold color grading, premium family portrait photography style, emotional bonding, clean centered composition, 85mm lens look, shallow depth of field, realistic fabric textures, warm cozy atmosphere, luxury portrait aesthetic, studio-quality retouching, elegant Tamil typography on left side saying “நான் பார்த்த முதல் முகம் நீ நான் கேட்ட முதல் குரல் நீ” in stylish golden calligraphy with decorative ornaments, 8K ultra realistic, timeless emotional portrait, 3:4 aspect ratio.`
-
 },
 
 {
 code:"GPR03",
 title:"Cm Girl prompt",
 thumbnail:"Girl Ai prompt thunail3.jpeg",
-
 prompt:`A highly realistic cinematic photograph of a young woman (use the uploaded face exactly, do not alter facial features, identity, or proportions) standing beside a Chief Minister JOSEPH VIJAY seated at an official government desk of Chief Minister seat. The Chief Minister VIJAY resembles a charismatic South Indian leader wearing a crisp white shirt, sitting in a premium leather chair, smiling warmly while receiving a bouquet of flowers. Vijay is looking at the young woman. The young woman is standing respectfully on the right side, wearing a clean white chudi (salwar suit), giving a polite humble smile, slightly leaning forward while handing over a colorful bouquet. The woman is looking at the camera with a light smile. Background features a luxurious government office setup with wooden panels, official desk, Indian flags on both sides, and a large "Government of Tamil Nadu" emblem on the wall behind. Final art 100% same face structure, 3:4 aspect ratio.`
-
 },
 
 {
 code:"GPR04",
 title:"Girl Ai Prompt",
 thumbnail:"Girl Ai prompt thumnail4.jpeg",
-
 prompt:`“A young Indian man sitting on a stool, wearing a beige hoodie and black pants, calm confident expression, surrounded by multiple cute mini cartoon versions of himself in different poses (sitting, climbing rope, taking photos, waving, using phone), warm yellow-orange gradient background, modern motivational poster style, soft cinematic lighting, highly detailed face, 3D cartoon characters, depth of field, aesthetic composition, books stacked beside him (self-improvement theme), notebook on floor 3:4`
+},
 
-}
+{
+code:"GPR05",
+title:"Portrait Girl",
+thumbnail:"jsghj.jpg",
+prompt:`Create image Ultra-realistic masterpiece portrait of a beautiful 20-year-old South Asian girl, unmarried youthful appearance, wearing a luxurious royal blue saree with subtle shimmer and intricate silver embroidery, matching embroidered blouse, elegant and graceful styling, long straight silky dark brown hair flowing naturally with soft wind movement, a few delicate strands falling across her face, smooth glowing fair skin with natural texture, 3:4 Ratio.`
+},
+
+{
+code:"GPR06",
+title:"Dreamy cinematic portrait collage poster",
+thumbnail:"girlportraitcollage.jpg",
+prompt:`A dreamy cinematic portrait collage poster of a beautiful young girl. The background is a deep aesthetic purple gradient with soft glowing light rays, dreamy haze, abstract floral textures, and cinematic bokeh lighting. The composition features multiple black-and-white polaroid-style portrait frames floating around the main subject in different angles and positions, creating a stylish scrapbook collage effect. Each side portrait shows different expressions and poses of the same young girl with soft monochrome tones and realistic contrast. Add glowing lavender light behind the subject, soft bloom effects, subtle lens flare, misty atmosphere, smooth gradients, and a premium Instagram-style aesthetic. The overall mood is elegant, emotional, modern, and artistic with shallow depth of field and cinematic color grading in purple, pink, and white tones. Ultra-detailed, high resolution, DSLR quality, editorial fashion poster style, soft shadows, realistic skin texture, centered composition, aesthetic social media poster design, 8K quality Poster down side added text Butterfly text size is small size. font use a brush font, and white cursive font added Little prince, overall poster ratio is 3:4.`
+},
+
+{
+code:"GPR07",
+title:"A sophisticated four-panel fashion photography collage",
+thumbnail:"fashionphotographycollage.jpg",
+prompt:`A sophisticated four-panel fashion photography collage featuring a young woman in an alternative colorway of the floral saree. a sheer cream base adorned with vibrant blue and green botanical prints. The left main panel shows a medium.full body shot of the woman in a similar elegant standing pose with soft, dappled daylight shadows.She is adjusting her hair, revealing the full print on the pallu and body. 3:4 Ratio.`
+},
 
 ];
 
-/* ================= DISPLAY VIDEOS ================= */
+/* =================================================== */
+/* 2. ENGINE LOGIC (STREAMLINED FOR EASIER UPGRADES)   */
+/* =================================================== */
 
+/* --- UNIVERSAL PROJECT VIDEO RENDERER --- */
 function displayVideos(list){
-
-const results =
-document.getElementById("videoResults");
-
+const results = document.getElementById("videoResults");
 results.innerHTML = "";
-
 list.forEach(video => {
-
 results.innerHTML += `
-
 <div class="card">
-
 <img src="${video.thumbnail}">
-
 <div class="card-content">
-
 <h2>${video.code}</h2>
-
 <p>${video.title}</p>
-
-<a
-class="open-btn"
-href="${video.link}"
-target="_blank">
-
-OPEN PROJECT
-
-</a>
-
+<a class="open-btn" href="${video.link}" target="_blank">OPEN PROJECT</a>
 </div>
-
 </div>
-
 `;
-
 });
-
 }
 
-/* ================= DISPLAY BOY PROMPTS ================= */
-
-function displayBoyPrompts(list){
-
-const results =
-document.getElementById("boyPromptResults");
-
+/* --- UNIVERSAL PROMPT CARD RENDERER --- */
+function displayPrompts(list, targetElementId){
+const results = document.getElementById(targetElementId);
 results.innerHTML = "";
-
 list.forEach(prompt => {
-
 results.innerHTML += `
-
 <div class="card">
-
 <img src="${prompt.thumbnail}">
-
 <div class="card-content">
-
 <h2>${prompt.code}</h2>
-
 <p>${prompt.title}</p>
-
-<textarea
-id="${prompt.code}"
-class="prompt-box"
-readonly>${prompt.prompt}</textarea>
-
-<button
-class="copy-btn"
-onclick="copyPrompt('${prompt.code}')">
-
-COPY PROMPT
-
-</button>
-
+<textarea id="${prompt.code}" class="prompt-box" readonly>${prompt.prompt}</textarea>
+<button class="copy-btn" onclick="copyPrompt('${prompt.code}')">COPY PROMPT</button>
 </div>
-
 </div>
-
 `;
-
 });
-
 }
 
-/* ================= DISPLAY GIRL PROMPTS ================= */
-
-function displayGirlPrompts(list){
-
-const results =
-document.getElementById("girlPromptResults");
-
-results.innerHTML = "";
-
-list.forEach(prompt => {
-
-results.innerHTML += `
-
-<div class="card">
-
-<img src="${prompt.thumbnail}">
-
-<div class="card-content">
-
-<h2>${prompt.code}</h2>
-
-<p>${prompt.title}</p>
-
-<textarea
-id="${prompt.code}"
-class="prompt-box"
-readonly>${prompt.prompt}</textarea>
-
-<button
-class="copy-btn"
-onclick="copyPrompt('${prompt.code}')">
-
-COPY PROMPT
-
-</button>
-
-</div>
-
-</div>
-
-`;
-
-});
-
+/* --- MASTER TRIGGER TO FILL SECTIONS --- */
+function refreshAllSections(videoSrc, bothSrc, boySrc, girlSrc) {
+displayVideos(videoSrc);
+displayPrompts(bothSrc, "bothPromptResults");
+displayPrompts(boySrc, "boyPromptResults");
+displayPrompts(girlSrc, "girlPromptResults");
 }
 
-/* ================= SEARCH ================= */
-
+/* --- SEARCH FILTER LOGIC --- */
 function searchItems(){
-
-let input =
-document.getElementById("searchInput")
-.value.toUpperCase();
+let input = document.getElementById("searchInput").value.toUpperCase();
 
 if(input === ""){
-
-displayVideos(videos);
-displayBoyPrompts(boyPrompts);
-displayGirlPrompts(girlPrompts);
-
+refreshAllSections(videos, bothPrompts, boyPrompts, girlPrompts);
 return;
 }
 
-const filteredVideos =
-videos.filter(video =>
-video.code.includes(input)
-);
+const filteredVideos = videos.filter(v => v.code.toUpperCase().includes(input) || v.title.toUpperCase().includes(input));
+const filteredBoth = bothPrompts.filter(p => p.code.toUpperCase().includes(input) || p.title.toUpperCase().includes(input));
+const filteredBoys = boyPrompts.filter(p => p.code.toUpperCase().includes(input) || p.title.toUpperCase().includes(input));
+const filteredGirls = girlPrompts.filter(p => p.code.toUpperCase().includes(input) || p.title.toUpperCase().includes(input));
 
-const filteredBoyPrompts =
-boyPrompts.filter(prompt =>
-prompt.code.includes(input)
-);
-
-const filteredGirlPrompts =
-girlPrompts.filter(prompt =>
-prompt.code.includes(input)
-);
-
-displayVideos(filteredVideos);
-displayBoyPrompts(filteredBoyPrompts);
-displayGirlPrompts(filteredGirlPrompts);
-
+refreshAllSections(filteredVideos, filteredBoth, filteredBoys, filteredGirls);
 }
 
-/* ================= COPY ================= */
-
+/* --- COPY FUNCTIONALITY --- */
 function copyPrompt(id){
-
-const text =
-document.getElementById(id);
-
+const text = document.getElementById(id);
 navigator.clipboard.writeText(text.value);
-
 alert("Prompt Copied!");
-
 }
 
-/* ================= FIRST LOAD ================= */
-
-displayVideos(videos);
-displayBoyPrompts(boyPrompts);
-displayGirlPrompts(girlPrompts);
+/* --- INITIAL RUNTIME --- */
+refreshAllSections(videos, bothPrompts, boyPrompts, girlPrompts);
 
 </script>
 
 </body>
-</html>  
+</html>
