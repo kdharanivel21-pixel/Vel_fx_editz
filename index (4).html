@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Vel_fx_editz</title>
+
+<style>
+/* THEME SYSTEM CONTROLS USING DYNAMIC CSS VARIABLES */
+:root {
+  --primary-gradient: linear-gradient(45deg, #ff00ff, #00ffff);
+  --bg-color: #000000;
+  --card-bg: #111111;
+  --text-color: #ffffff;
+  --accent-color: #00ffff;
+  --hover-glow: #ff00ff;
+  --secondary-glow: #00ffff;
+  --box-shadow-color: rgba(0, 255, 255, 0.4);
+  --card-shadow-color: rgba(0, 255, 255, 0.6);
+  --card-hover-shadow: rgba(255, 0, 255, 0.8);
+}
+
+/* THEME 2: ROYAL PURPLE & GOLD */
+[data-theme="royal"] {
+  --primary-gradient: linear-gradient(45deg, #ffd700, #8a2be2);
+  --bg-color: #0b0518;
+  --card-bg: #160f24;
+  --accent-color: #ffd700;
+  --hover-glow: #8a2be2;
+  --secondary-glow: #ffd700;
+  --box-shadow-color: rgba(255, 215, 0, 0.4);
+  --card-shadow-color: rgba(255, 215, 0, 0.5);
+  --card-hover-shadow: rgba(138, 43, 226, 0.9);
+}
+
+/* THEME 3: EMERALD MINT */
+[data-theme="emerald"] {
+  --primary-gradient: linear-gradient(45deg, #00ff87, #60efff);
+  --bg-color: #040d0a;
+  --card-bg: #0d1a15;
+  --accent-color: #00ff87;
+  --hover-glow: #60efff;
+  --secondary-glow: #00ff87;
+  --box-shadow-color: rgba(0, 255, 135, 0.4);
+  --card-shadow-color: rgba(0, 255, 135, 0.5);
+  --card-hover-shadow: rgba(96, 239, 255, 0.9);
+}
+
+/* THEME 4: CRIMSON DARK RED */
+[data-theme="crimson"] {
+  --primary-gradient: linear-gradient(45deg, #ff0055, #990000);
+  --bg-color: #0a0104;
+  --card-bg: #16040a;
+  --accent-color: #ff0055;
+  --hover-glow: #ffffff;
+  --secondary-glow: #ff0055;
+  --box-shadow-color: rgba(255, 0, 85, 0.4);
+  --card-shadow-color: rgba(255, 0, 85, 0.5);
+  --card-hover-shadow: rgba(255, 255, 255, 0.8);
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+transition: background 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+body{
+background: var(--bg-color);
+color: var(--text-color);
+overflow-x:hidden;
+}
+
+/* BACKGROUND PIPES ANIMATION */
+body::before{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:200%;
+height:200%;
+background:
+radial-gradient(circle, rgba(0,255,255,0.08) 10%,transparent 10%),
+radial-gradient(circle, rgba(255,0,255,0.08) 10%,transparent 10%);
+background-size:120px 120px;
+animation:bgMove 10s linear infinite;
+z-index:-1;
+}
+
+@keyframes bgMove{
+0%{ transform:translate(0,0); }
+100%{ transform:translate(-120px,-120px); }
+}
+
+/* THEME TOGGLE FAB FLOATING BUTTON */
+.theme-switcher-btn {
+position: fixed;
+top: 20px;
+right: 20px;
+z-index: 9999;
+background: var(--primary-gradient);
+border: 2px solid var(--text-color);
+color: #fff;
+padding: 12px 20px;
+border-radius: 30px;
+font-weight: bold;
+cursor: pointer;
+box-shadow: 0 4px 15px rgba(0,0,0,0.5), 0 0 10px var(--accent-color);
+display: flex;
+align-items: center;
+gap: 8px;
+font-size: 14px;
+text-transform: uppercase;
+letter-spacing: 1px;
+}
+
+.theme-switcher-btn:hover {
+transform: scale(1.05);
+box-shadow: 0 4px 20px rgba(0,0,0,0.6), 0 0 20px var(--hover-glow);
+}
+
+.theme-switcher-btn:active {
+transform: scale(0.95);
+}
+
+/* HEADER */
+header{
+padding:40px 20px;
+text-align:center;
+background: var(--primary-gradient);
+box-shadow:0 0 25px var(--secondary-glow);
+position: relative;
+}
+
+.logo{
+width:220px;
+height:220px;
+border-radius:50%;
+object-fit:cover;
+border:5px solid var(--accent-color);
+padding:5px;
+background:#000;
+box-shadow:
+0 0 20px var(--accent-color),
+0 0 40px var(--hover-glow);
+animation:float 3s ease-in-out infinite;
+}
+
+@keyframes float{
+0%{ transform:translateY(0); }
+50%{ transform:translateY(-10px); }
+100%{ transform:translateY(0); }
+}
+
+header h1{
+font-size:48px;
+margin-top:20px;
+text-shadow:0 0 20px var(--accent-color);
+}
+
+header p{
+margin-top:10px;
+font-size:20px;
+margin-bottom:25px;
+}
+
+/* ACTION BUTTONS GRID CONTAINER */
+.header-actions {
+display: flex;
+justify-content: center;
+gap: 20px;
+flex-wrap: wrap;
+margin-bottom: 10px;
+}
+
+/* FOLLOW BUTTON */
+.follow-btn{
+display:inline-block;
+padding:14px 32px;
+background:#0095f6;
+color:white;
+text-decoration:none;
+font-size:18px;
+font-weight:bold;
+border-radius:14px;
+box-shadow: 0 0 15px #0095f6, 0 0 30px rgba(0,149,246,0.5);
+transition:0.3s;
+animation:pulse 2s infinite;
+}
+
+.follow-btn:hover{
+transform:scale(1.08);
+background:#1877f2;
+}
+
+/* NEW TELEGRAM JOIN BUTTON & ICON DESIGN */
+.tg-btn {
+display: inline-flex;
+align-items: center;
+gap: 10px;
+padding: 14px 32px;
+background: #24A1DE;
+color: white;
+text-decoration: none;
+font-size: 18px;
+font-weight: bold;
+border-radius: 14px;
+box-shadow: 0 0 15px #24A1DE, 0 0 30px rgba(36,161,222,0.5);
+transition: 0.3s;
+animation: pulse 2s infinite 0.5s;
+}
+
+.tg-btn:hover {
+transform: scale(1.08);
+background: #1d84b5;
+box-shadow: 0 0 25px #24A1DE;
+}
+
+.tg-icon {
+width: 24px;
+height: 24px;
+fill: white;
+}
+
+@keyframes pulse{
+0%{ transform:scale(1); }
+50%{ transform:scale(1.05); }
+100%{ transform:scale(1); }
+}
+
+/* SEARCH */
+.search-box{
+display:flex;
+justify-content:center;
+margin:40px 20px;
+}
+
+.search-box input{
+width:300px;
+padding:15px;
+border:2px solid var(--accent-color);
+border-right: none;
+outline:none;
+font-size:18px;
+border-radius:12px 0 0 12px;
+background: var(--card-bg);
+color: var(--text-color);
+}
+
+.search-box button{
+padding:15px 25px;
+border:none;
+background: var(--accent-color);
+color: black;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+border-radius:0 12px 12px 0;
+transition:0.3s;
+}
+
+.search-box button:hover{
+background: var(--hover-glow);
+color: white;
+box-shadow: 0 0 15px var(--hover-glow);
+}
+
+/* SECTION TITLE */
+.section-title{
+text-align:center;
+font-size:40px;
+margin-top:50px;
+margin-bottom:30px;
+color: var(--accent-color);
+text-shadow:0 0 20px var(--box-shadow-color);
+}
+
+/* CARD AREA */
+.card-area{
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(320px, max-content));
+justify-content: center;
+gap:30px;
+padding:20px;
+width: 100%;
+}
+
+/* CARD */
+.card{
+width:320px;
+background: var(--card-bg);
+border-radius:20px;
+overflow:hidden;
+box-shadow:0 0 25px var(--card-shadow-color);
+transition:0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+animation:fadeUp 1s ease;
+display: flex;
+flex-direction: column;
+border: 1px solid rgba(255,255,255,0.05);
+}
+
+@keyframes fadeUp{
+from{ opacity:0; transform:translateY(50px); }
+to{ opacity:1; transform:translateY(0); }
+}
+
+.card:hover{
+transform:translateY(-10px) scale(1.04);
+box-shadow:0 0 35px var(--card-hover-shadow);
+}
+
+/* IMAGE - 3:4 RATIO */
+.card img{
+width:100%;
+aspect-ratio: 3 / 4;
+object-fit:cover;
+border-bottom:3px solid var(--accent-color);
+object-position: center top;
+}
+
+/* CONTENT */
+.card-content{
+padding:20px;
+text-align:center;
+display: flex;
+flex-direction: column;
+flex-grow: 1;
+justify-content: space-between;
+}
+
+.card-content h2{
+font-size:28px;
+color: var(--accent-color);
+margin-bottom:10px;
+}
+
+.card-content p{
+font-size:18px;
+color:#ccc;
+margin-bottom:20px;
+}
+
+/* BUTTONS */
+.open-btn{
+display:inline-block;
+padding:12px 25px;
+background: var(--hover-glow);
+color:white;
+text-decoration:none;
+border-radius:12px;
+font-weight:bold;
+transition:0.3s;
+box-shadow:0 0 20px var(--hover-glow);
+margin-top: auto;
+}
+
+.open-btn:hover{
+transform:scale(1.1);
+background: var(--accent-color);
+color:black;
+box-shadow: 0 0 20px var(--accent-color);
+}
+
+.copy-btn{
+padding:14px 25px;
+border:none;
+background: var(--primary-gradient);
+color:white;
+font-size:16px;
+font-weight:bold;
+border-radius:12px;
+cursor:pointer;
+transition:0.3s;
+box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+width: 100%;
+}
+
+.copy-btn:hover{
+transform:scale(1.05);
+box-shadow:0 0 25px var(--hover-glow);
+}
+
+/* PROMPT BOX */
+.prompt-box{
+width:100%;
+height:140px;
+background:#000;
+color: var(--accent-color);
+border:2px solid var(--accent-color);
+border-radius:15px;
+padding:15px;
+font-size:15px;
+margin-bottom:20px;
+outline:none;
+resize:none;
+}
+
+/* FOOTER */
+footer{
+margin-top:60px;
+padding:20px;
+text-align:center;
+background: var(--card-bg);
+box-shadow:0 0 20px var(--box-shadow-color);
+border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.insta{
+color: var(--accent-color);
+text-decoration:none;
+font-weight:bold;
+}
+
+/* MOBILE RESPONSIVENESS */
+@media(max-width:600px){
+.theme-switcher-btn {
+top: auto;
+bottom: 20px;
+right: 20px;
+padding: 10px 16px;
+font-size: 12px;
+}
+
+.logo{
+width:160px;
+height:160px;
+}
+
+header h1{
+font-size:34px;
+}
+
+.section-title{
+font-size:30px;
+}
+
+.card-area {
+grid-template-columns: 1fr;
+padding: 10px;
+}
+
+.card{
+width:100%;
+}
+
+.search-box input{
+width:60%;
+}
+.search-box button{
+width:40%;
+}
+.header-actions {
+flex-direction: column;
+align-items: center;
+gap: 12px;
+}
+.follow-btn, .tg-btn {
+width: 80%;
+text-align: center;
+justify-content: center;
+}
+}
+</style>
+</head>
+
+<body>
+
+<button class="theme-switcher-btn" onclick="toggleTheme()">🎨 Change Theme</button>
+
+<header>
+<img class="logo" src="Vel_fx_editz logo 2.png" alt="Logo">
+<h1>Vel_fx_editz</h1>
+<p>Instagram Alight Motion & AI Prompt Website</p>
+<div class="header-actions">
+  <a class="follow-btn" href="https://www.instagram.com/vel_fx_editz?igsh=MWYzOXo4MmMzaW5hZg==" target="_blank">FOLLOW</a>
+  <a class="tg-btn" href="https://t.me/Vel_fx_edit" target="_blank">
+    <svg class="tg-icon" viewBox="0 0 24 24">
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.24-5.54 3.65-.52.36-1 .53-1.42.52-.47-.01-1.37-.26-2.03-.48-.82-.27-1.47-.42-1.42-.88.03-.24.35-.49.97-.74 3.79-1.65 6.32-2.74 7.59-3.27 3.61-1.51 4.36-1.77 4.85-1.78.11 0 .35.03.5.16.13.12.17.28.19.4z"/>
+    </svg>
+    JOIN TELEGRAM
+  </a>
+</div>
+</header>
+
+<div class="search-box">
+<input type="text" id="searchInput" placeholder="Search here"/>
+<button onclick="searchItems()">SEARCH</button>
+</div>
+
+<h2 class="section-title">🔥 ALIGHT MOTION PROJECTS 🔥</h2>
+<div id="videoResults" class="card-area"></div>
+
+<h2 class="section-title">🧑‍🤝‍🧑 BOTH BOY AND GIRLS 🧑‍🤝‍🧑</h2>
+<div id="bothPromptResults" class="card-area"></div>
+
+<h2 class="section-title">🧑 BOY AI PROMPTS 🧑</h2>
+<div id="boyPromptResults" class="card-area"></div>
+
+<h2 class="section-title">👧 GIRL AI PROMPTS 👧</h2>
+<div id="girlPromptResults" class="card-area"></div>
+
+<footer>
+<p>Created By Dharanivel</p>
+<p>Instagram : <a class="insta" href="https://www.instagram.com/Vel_fx_edit/" target="_blank">@Vel_fx_edit</a></p>
+</footer>
+
+<script>
+/* DATA SECTIONS - UNCHANGED AND PRESERVED EXACTLY */
+const videos = [
+{code:"AL01", title:"Boy Birthday Edit", thumbnail:"Thumnail1.png", description:"Amazing Birthday Edit", link:"https://alightcreative.com/"},
+{code:"AL02", title:"Girl Birthday Edit", thumbnail:"Girl birthdat thumnail3.jpeg", description:"New Reel Editing Project", link:"https://alightcreative.com/am/share/u/dnwk7emVc6NgGq5ftKToRPNXzyr2/p/z1VhQGOnjk-7afa5f713fc3d4f4"},
+  {code:"AL03", title:"Kanne Kalaimaane", thumbnail:"Kannae Kalai....png", description:"Alight Motion Preset", link:"https://alightcreative.com/am/share/u/dnwk7emVc6NgGq5ftKToRPNXzyr2/p/cUIzael2Gq-54da29974aeb4a91"},
+];
+
+const bothPrompts = [
+{
+code:"BG01", 
+title:"Rowdy Thangachi", 
+thumbnail:"rowdythangachi.jpg", 
+prompt:`Create a premium ultra-detailed cute chibi-style poster with a clean white to light grey gradient background, in 3:4 aspect ratio.
+At the top center, add stylish bold typography text: “Rowdy தங்கச்சி Appaavi அண்ணன்..!” 
+— “Rowdy தங்கச்சி” in bright hot pink gradient with soft white outline, glossy 3D effect, and subtle shadow. 
+— “Appaavi அண்ணன்..!” in deep dark purple to black glossy finish with smooth depth. 
+Add small heart doodles, spark accents, decorative pink lines, and cute sticker-style elements around the title. 
+IMPORTANT STYLE INSTRUCTION: Do NOT generate anime face. Do NOT generate cartoon face. 
+Faces must look like real human faces with original facial structure and natural skin texture. 
+Maintain high face accuracy from reference images (original face identity preserved). 
+Only body proportions should be chibi-style (big head, small body), while faces remain realistic and detailed. 
+No exaggerated animated eyes, no cartoon nose, no plastic skin.`
+},
+{
+code:"BG02", 
+title:"Premium Pixel Stretch Digital Artwork", 
+thumbnail:"premiumpixelstretchdigitalartwork.jpg", 
+prompt:`Transform the uploaded image into a premium pixel stretch digital artwork while keeping the main subject perfectly sharp, detailed, and recognizable. 
+Preserve the original identity, silhouette,, lighting, and composition of the subject. 
+Extract the colors, textures, and atmosphere from the image and extend them outward into smooth, flowing pixel-stretch ribbons that follow elegant curves and dynamic motion.
+Create seamless transitions between the original photo and the stretched areas, with no glitches, broken pixels, or harsh edges. 
+The stretched pixels should look silky, fluid, and organic - like streams of color, light, paint, smoke, or energy flowing through the scene.
+Maintain realistic depth, shadows, reflections, and natural lighting. 
+Enhance the image with cinematic contrast, vibrant HDR colors, ultra-sharp details, and a luxury digital art aesthetic.
+Style: Adobe Photoshop pixel stretch effect, liquid motion blur, flowing light trails, abstract energy waves, gallery-quality digital artwork, modern minimalist composition, cinematic photography, 8K ultra-high resolution, premium social media masterpiece.
+3:4 Ratio.
+Keep the subject untouched and crystal clear while the environment transforms into artistic flowing motion.`
+},
+{
+code:"BG03", 
+title:"Cinematic Tiny Planet", 
+thumbnail:"cinematictinyplanet.jpg", 
+prompt:`Ultra-realistic cinematic tiny-planet portrait of a young man. 
+The young man stands exactly at the center of a miniature floating globe, facing the camera with a calm, confident expression. 
+Full body visible from a slightly elevated ultra-wide fisheye perspective, creating a dramatic tiny-planet effect. 
+His body is relaxed, with both hands tucked naturally into the pockets of a beige oversized hoodie, paired with black jogger pants and stylish white-and-black sneakers. 
+He has short, slightly textured black hair and a handsome, realistic face matching the reference image.
+Surrounding him is a vibrant nostalgic 2000s cartoon universe with a bright blue sky, fluffy cinematic clouds, and warm golden sunlight. 
+Characters positioned around the globe: Doraemon flying at the upper left, Shinchan floating near the top center, Kid Goku riding the Flying Nimbus at the upper right, Pikachu on a rooftop left, Naruto sitting left-center making a peace sign, Monkey D. Luffy cheering on the right-center, Ben 10 punching forward with the Omnitrix at the lower right, Tom & Jerry at the lower left, SpongeBob SquarePants waving at the bottom left, Chhota Bheem standing front-center with folded arms, Ash Ketchum holding a Poké Ball at the bottom right, a small blue cartoon companion, nostalgic buildings, colorful flowers, lush trees, balloons, a Cartoon Network signboard, a vintage Cartoon Network TV, a wooden sign reading "CHILDHOOD 2000s MEMORIES", a skateboard, and a fantasy cityscape wrapping around the spherical world.
+Hyper-detailed, ultra-realistic, HDR, vibrant colors, global illumination, ray-traced lighting, depth of field, crisp focus, cinematic contrast, whimsical fantasy atmosphere, premium editorial quality, masterpiece, 8K, vertical 3:4.`
+},
+{
+code:"BG04", 
+title:"Illustrated Poster", 
+thumbnail:"Illustrated Poster.jpg", 
+prompt:`Create a romantic illustrated poster in modern digital vector art style, warm terracotta-orange background with subtle paper texture. 
+Two young South Asian adults standing back-to-back in a candid, affectionate pose. 
+The woman is on the left, shoulder-length dark wavy hair, expressive eyes, wearing a rust-red patterned ethnic dress with black beaded jewelry, looking up at the man with a gentle smile. 
+The man is on the right, messy dark hair, light stubble, wearing a beige casual shirt with rolled sleeves, sunglasses resting on his head, looking back at the woman with a soft smile. 
+A single red flower is held between them, crossing diagonally through the composition. 
+Clean geometric shading, polygonal/vector illustration, cinematic romantic mood, detailed facial expressions, soft warm lighting, muted earthy color palette, poster-art aesthetic, high-detail digital painting, symmetrical composition, centered characters, magazine-cover quality. 
+Large retro typography at the top reading "LOVE" in oversized pale yellow-green geometric letters. 
+Above it, smaller white uppercase text: "WHERE EVERY UNSPOKEN FEELING BECOMES A MESSAGE." 
+Social-media poster layout with minimal UI elements on the right side, contemporary Indian romance artwork, highly polished vector illustration, sharp lines, subtle grain texture, 4K quality, portrait. 
+3:4 Ratio.`
+},
+{
+code:"BG05", 
+title:"Cinematic Poster", 
+thumbnail:"Cinematic poster.jpg", 
+prompt:`A Uploaded image Create a premium cinematic poster featuring the in a three-pose composite. 
+Place a sharp front-facing portrait in the center wearing a same dress with. 
+Behind her, add a large black-and-white portrait on the left with a soft smile and another warm-toned side-profile portrait on the right looking upward. 
+Blend all three portraits seamlessly with soft feathered edges. 
+Add a large pink flower behind the central figure's head as a decorative element. 
+Use a dark gray-to-black gradient studio background with soft vignette, warm rim lighting, glowing highlights, realistic skin tones, high-end beauty retouching, shallow depth of field, and dramatic wedding photography lighting. 
+Create a luxurious, elegant, magazine-style composition with premium color grading, ultra-detailed textures, and a subtle glow. 
+At the bottom, place the name "YOUR NAME" in a large white luxury serif font, with the subtitle "Behind every wil women is a squad that makes her feel like a queen." in small elegant cursive beneath it. 
+Ultra-realistic, 8K, high contrast, professional wedding album cover, clean composition, flawless facial details 3:4 Ratio.`
+},
+
+  {
+  code:"BG06",
+    title:"Surreal Conceptual Digital Artwork",
+    thumbnail:"surreal conceptual digital artwork.jpg",
+    prompt:`
+ Create a surreal conceptual digital artwork featuring a side-profile portrait of SUBJECT, where the entire face and upper body are composed of thousands of tiny human figures standing close together. Accurately preserve the subject's facial identity, structure, hairstyle, skin tone, and recognizable features. The portrait must feature realistic facial anatomy, a detailed jawline, natural proportions, and seamless integration of the crowd. The tiny figures should vary in clothing color, pose, walking direction, and body language, creating an intricate human mosaic. Some individuals should appear to be walking slowly away from the silhouette, creating a dynamic dispersing effect around the edges of the face, hair, neck, and shoulders. The scene is viewed from a slightly elevated angle against a clean, minimalist white background. Warm, directional cinematic sunlight casts long, dramatic shadows on the ground. Features include ultra- 3:4.`
+},
+
+  {
+    code:"BG07",
+    title:"Indian family portrait",
+    thumbnail:"Family.png",
+    prompt:`Create a premium ultra-realistic South Indian family portrait in 3:4 ratio.
+Composition:
+Left: A handsome South Indian son wearing a premium black formal suit, white shirt, black tie, neatly styled hair, standing confidently with a calm emotional expression.
+Center: A graceful mother wearing an elegant traditional silk saree with simple gold jewellery and jasmine flowers in her hair, smiling gently while standing proudly between her children.
+Right: A beautiful South Indian daughter wearing a stylish modern churidar (salwar suit) with elegant embroidery, long neatly styled hair, minimal jewellery, and a warm smile.
+All three are standing close together, facing the camera with natural poses that express love, unity, care, and family bonding.
+Background & Style: Gradient studio background, professional softbox lighting, golden-hour rim light, soft shadows, creamy depth of field, ultra-realistic skin details, cinematic brown and gold color grading, premium family portrait photography style, clean centered composition, 85mm lens look, shallow depth of field, realistic fabric textures, warm cozy atmosphere, luxury portrait aesthetic, studio-quality retouching, 8K ultra-realistic, timeless emotional portrait.
+Tamil Typography (Left Side):
+"நான் பார்த்த முதல் முகம் நீ
+நான் கேட்ட முதல் குரல் நீ"
+Use elegant golden Tamil calligraphy with decorative ornaments, beautifully blended into the background without covering the faces.`
+  },
+
+  {
+    code:"BG08",
+    title:"Aerial Drone View Portrait",
+    thumbnail:"Water waves.png",
+    prompt:`Keeping the exact facial features of uploaded image couple ,create an ultra realistic aerial drone view portrait of ocean water ,both their faces should be formed in the form of soft water waves. Both faces look at the camera. One jet boat should be moving beside their faces. It should be like jet boat making the face formation. Ensure drone view. Aspect ratio 4:5.`
+  },
+
+  {
+    code:"BG09",
+    title:"Underwater Portrait",
+    thumbnail:"Blue water.jpg",
+    prompt:`A Uploaded image underwater portrait of a upload image floating peacefully beneath clear blue water, eyes closed, same dress flowing softly, sunlight reflecting with shimmering ripple patterns across his face and body, detailed finely hair moving underwater, dreamy mood, ultra realistic, soft tonal lighting, bubbles around, calm emotional expression, high detail skin texture, teal ocean tones, shallow depth of field, natural professional photography, 4K, vertical composition, Instagram aesthetic`
+  },
+  
+];
+
+const boyPrompts = [
+{
+code:"BPR01", 
+title:"Boy Karuppu Mass Poster", 
+thumbnail:"Ai prompt thumnail1.jpeg", 
+prompt:`ULTRA-REALISTIC 8K CINEMATIC TAMIL MOVIE POSTER OF A STYLISH YOUNG SOUTH INDIAN MAN SITTING CENTRALLY ON ROUGH STONE STEPS IN A POWERFUL, DOMINANT POSE. 
+USE THE EXACT FACE FROM THE UPLOADED IMAGE WITH HIGHLY ACCURATE FACE RESEMBLANCE, NATURAL SKIN TEXTURE, SHARP JAWLINE, REALISTIC EYES, CLEAN FACIAL DETAILS, SHORT STYLISH HAIR VISIBLE CLEARLY FROM THE FRONT, HAIR NOT COVERING THE FOREHEAD, PROPER HEAD ALIGNMENT, NATURAL EXPRESSION, AND CINEMATIC LIGHTING ON THE FACE. 
+HE WEARS A DARK MAROON FULL-SLEEVE SHIRT WITH ROLLED-UP SLEEVES AND A DARK GREEN DHOTI WITH GOLDEN BORDER. 
+ONE LEG IS PLACED HIGHER ON THE STEP WITH A MASS LEADER ATTITUDE. 
+HE LOOKS SLIGHTLY SIDEWAYS WITH A SERIOUS, INTENSE EXPRESSION. AND A WATCH. 
+SURROUNDING HIM ARE FOUR TERRIFYING KARUPPU SAMI DEVOTEES. 
+THEIR BODIES ARE COMPLETELY PAINTED MATTE CHARCOAL BLACK WITH HYPER-DETAILED SKIN TEXTURE. 
+THEIR FACES HAVE AGGRESSIVE WHITE AND RED CEREMONIAL PAINT WITH LARGE EYES, SHARP TEETH, AND LONG TONGUES STICKING OUT. 
+THEY WEAR HUGE GARLANDS MADE OF YELLOW LEMONS, MARIGOLDS, RUDRAKSHA BEADS, AND SILVER ANKLE BELLS. 
+EACH HOLDS A MASSIVE CURVED SILVER ARUVAL UPRIGHT. 
+TWO SIT BESIDE THE HERO ON LOWER STEPS AND TWO STAND BEHIND HIM IN AN INTIMIDATING PROTECTIVE FORMATION. 
+BACKGROUND FILLED WITH BLOOD-RED MIST, FIRE EMBERS, TEMPLE ATMOSPHERE, DARK SHADOWS, VOLUMETRIC RED FOG, CINEMATIC DUST PARTICLES, AND EPIC CONTRAST. 
+A HUGE STONE STATUE OF A DEITY RIDING A HORSE IS VISIBLE IN THE BACKGROUND THROUGH THE RED SMOKE. 
+ADD TEMPLE TRIDENTS, FIRE TORCHES, AND TRADITIONAL TAMIL FOLK ELEMENTS FOR A DIVINE MASS LOOK. 
+DRAMATIC MOODY LIGHTING, HYPER-DETAILED FABRIC TEXTURES, EPIC SCALE COMPOSITION, CINEMATIC RED-AND-BLACK COLOR GRADING, ULTRA SHARP DETAILS, DEPTH OF FIELD, HIGH CONTRAST, MOVIE POSTER STYLE. 
+AT THE BOTTOM CENTER, ADD LARGE STYLIZED TAMIL TITLE TEXT “கருப்பு” IN A METALLIC GOLDEN COLOR WITH BRUSHSTROKE CALLIGRAPHY STYLE, GLOWING EDGES, AND CINEMATIC SHADOW. 
+VERTICAL POSTER, 3:4 ASPECT RATIO, ULTRA-HD, MASTERPIECE QUALITY, CINEMATIC COMPOSITION, REALISTIC FACE SWAP, PROFESSIONAL MOVIE POSTER FINISH.`
+},
+{
+code:"BPR02", 
+title:"Son amma Prompt", 
+thumbnail:"Boy ai prompt2.jpeg", 
+prompt:`gradient studio background, professional softbox lighting, golden-hour rim light, soft shadows, creamy depth of field, ultra realistic skin details, cinematic brown and gold color grading, premium family portrait photography style, emotional bonding, clean centered composition, 85mm lens look, shallow depth of field, realistic fabric textures, warm cozy atmosphere, luxury portrait aesthetic, studio-quality retouching, elegant Tamil typography on left side saying "நான் பார்த்த முதல் முகம் நீ நான் கேட்ட முதல் குரல் நீ" in stylish golden calligraphy with decorative ornaments, 8K ultra realistic, timeless emotional portrait.3:4`
+},
+{
+code:"BPR03", 
+title:"CM Boy prompt", 
+thumbnail:"Boy ai prompt3.jpeg", 
+prompt:`A highly realistic cinematic photograph of a young man (use the uploaded face exactly, do not alter facial features, identity, or proportions) standing beside a cheif minister JOSEPH VIJAY seated at an official government desk of cheif minister seat. 
+The Chief Minister VIJAY resembles a charismatic South Indian leader wearing a crisp white shirt, sitting in a premium leather chair, smiling warmly while receiving a bouquet of flowers.vijay looking at young man 
+The young man is standing respectfully on the right side, wearing a clean white shirt, giving a polite humble smile slightly leaning forward while handing over a colorful bouquet.the man looking at camera light smile 
+Background features a luxurious government office setup with wooden panels, official desk, Indian flags on both sides, and a large "Government of Tamil Nadu" emblem on the wall behind.
+Final art 100% same facestructure 3:4.`
+},
+{
+code:"BPR04", 
+title:"Boy ai prompt", 
+thumbnail:"Boy ai prompt4.jpeg", 
+prompt:`Use a real face as a reference photo. 
+The background is the same as in the photo. 
+The lighting is warm, soft, and clean, with subtle shadows. 
+Around the image, add several mini chibi (3D cute style) versions of the character, While maintaining the original facial features. 
+expressions: jumping cheerfully waving sitting relaxed holding a drink cute and playful expressions 
+Add hand-drawn white doodle elements: outline around the main body stars, hearts, sparkles motion lines small cute icons 
+Add aesthetic handwriting such as: “shine,” “bright day,”happy,””smile,”” etc. (casual doodle font) 
+Overall style: clean & aesthetic composition white sticker outline soft pastel color tone high detall 3D chibi glossy look cute Korean style instagrammable. 3:4`
+},
+{
+code:"BPR05", 
+title:"Boy Potrait casuall", 
+thumbnail:"boypotrait.jpg", 
+prompt:`Ultra-realistic lifestyle portrait using my uploaded photo as the ONLY facial reference. 
+Preserve my face with 100% accuracy. 
+Recreate the exact pose: sitting casually on the edge of a modern floating bench, legs apart, leaning slightly forward, hands resting naturally on thighs, head slightly tilted, smiling at the camera. 
+Wear an oversized off-white sweatshirt, light neon lime-green baggy cargo pants, white & lime-green Nike Dunk Low sneakers, and a black smartwatch. 
+3:4 Ratio`
+},
+{
+code:"BPR06", 
+title:"A highly detailed cinematic portrait.", 
+thumbnail:"aestheticboypotrait.jpg", 
+prompt:`A highly detailed cinematic portrait of a stylish young man standing outdoors under a soft hazy sky with a warm muted aesthetic. 
+He has thick, voluminous messy black hair covering part of his forehead in a trendy fluffy hairstyle, sharp facial features, a neatly trimmed beard and mustache, and soft glowing skin. 
+He is wearing round black sunglasses, a plain white t-shirt, and a bright yellow oversized jacket with printed text details, left casually open. 
+3:4.`
+},
+{
+code:"BPR07", 
+title:"Typographic Portrait Boy", 
+thumbnail:"Typographicboyspic.jpg", 
+prompt:`A striking typographic portrait of a young man with a thoughtful three-quarters gaze, completely rendered in a text-mosaic and word-cloud style. 
+His entire form—skin, hair, and clothing—is constructed from varied typography, headlines, and the words "FOCUS", "LOVE", "MONEY", "DISCIPLINE", "POWER", and "SUCCESS". 
+Bold serif and sans-serif fonts define the strong contours of his neck, jawline, and facial structure, while fine delicate cursive and micro-text create the subtle midtones and highlights of his face. 
+His lips are naturally defined using textured typography. 
+The edges of his hair and torso gently dissolve into a chaotic dispersion of fragmented letters and ink splatters. 
+He has a modern masculine hairstyle with detailed typographic strands, a confident yet thoughtful expression, and sharp facial features. 
+The background is stark white, layered with faint vintage handwritten script and blurred newspaper print. 
+High contrast, layered multimedia collage, ultra-sharp detail, premium artistic graphic design, monochrome typography with subtle red accents, award-winning editorial style, 8K quality --ar 3:4.`
+},
+{
+code:"BPR08", 
+title:"Thalapathy Birthday poster", 
+thumbnail:"Thalapathybirthday.png", 
+prompt:`Prompt Create a premium cinematic birthday fan-made poster in a vertical 3:4 ratio. 
+On the left side, a charismatic South Indian superstar stands confidently in a black luxury suit with a white shirt, smiling warmly. 
+On the right side, a young South Indian man wearing stylish black sunglasses, a black suit, and a white shirt stands beside him. 
+Both are holding a large basket of vibrant flowers featuring yellow lilies, pink roses, purple chrysanthemums, and xlsh green foliage.`
+},
+{
+code:"BPR09", 
+title:"Birthday Poster", 
+thumbnail:"Birthday Poster.jpg", 
+prompt:`Ultra-realistic birthday poster of a stylish young South Asian man with voluminous textured black hair, light beard, and transparent eyeglasses. 
+Double exposure composition featuring a large monochrome close-up portrait on the left side with a soft smile and a smaller full-body walking pose on the right side. 
+He is wearing a trendy black-and-white graphic jacket over a white t-shirt, black cargo pants, smartwatch, and stylish sneakers. 
+Minimal aesthetic background with cool blue-grey tones, soft fog, wet reflective floor, and flying birds in the sky. 
+Modern luxury fashion vibe, soft natural lighting, ultra-detailed skin texture, high-end DSLR photography, poster design layout. 
+Bold typography text "YOUR NAME" in elegant blue handwritten script with premium magazine-style composition. 
+Clean cinematic editing, dreamy atmosphere, 8K ultra HD, realistic shadows, Instagram birthday poster style. 
+3:4 ratio`
+},
+{
+code:"BPR10", 
+title:"BEN 10", 
+thumbnail:"Ben10vel.png", 
+prompt:`A ultra-realistic cinematic portrait of a young Indian man resembling a modern, older version of Ben Tennyson, based on the reference image. 
+He has messy voluminous spiky dark-brown hair slightly blowing in the wind, stylish black glasses, trimmed beard, and a confident expression. 
+He is captured in a dramatic mid-transformation pose, looking directly at the glowing device on his left wrist. 
+His right hand is reaching toward the device as if activating it. 
+He is wearing a fitted white half-sleeve T-shirt with black accents and a vertical black stripe in the center, fully covering his body without exposing the midriff, paired with loose brown cargo pants and modern sneakers. 
+A prominent futuristic wrist device inspired by an Omnitrix is clearly visible on his left wrist, enlarged and detailed, emitting bright neon-green energy. 
+Green lightning, glowing particles, and energy cracks radiate from the watch and spread around his body, creating an intense transformation effect. 
+The background features a massive stylized number "10" positioned behind him, filled with a gradient transitioning from vibrant lime green to deep black. 
+Dark smoky atmosphere, floating particles, green glow, and cinematic lighting enhance the scene. 
+Hyper-realistic skin texture, highly detailed face matching the reference image, dynamic action pose, dramatic contrast, depth of field, movie-poster composition, Unreal Engine quality, volumetric lighting, 8K ultra-detailed, sharp focus, vibrant green energy effects. 
+Small square artist watermark with the text "Vel_fx_edit" in the bottom-right corner. --ar 3:4 --stylize 200 --quality 2 
+The glowing futuristic watch on the left wrist is fully visible and facing the camera, with the character looking directly at it while activating it, making the device the central focus of the image.`
+},
+{
+code:"BPR11", 
+title:"Luxury Studio Poster", 
+thumbnail:"STR text image.jpg", 
+prompt:`Create an ultra-premium luxury studio poster in vertical 3:4 ratio with me sitting on a modern wooden chair at center, chair tilted backward with front two legs slightly lifted in air, taking support on one leg naturally, leaning back confidently, both hands placed behind neck, one leg crossed over another, ego expression, looking upward with killer attitude. 
+Wear a stylish black jacket over a premium white shirt, fitted black pants, and glossy black formal shoes.
+1/2Behind me, giant glowing metallic letters spelling "YOUR NAME", each letter filled with different ultra-attractive portraits of me in stylish outfits and poses, including walking pose, leaning pose, crossed-hand pose, side-profile pose, and fashion pose. 
+Cinematic studio lighting, luxury atmosphere, depth of field, dramatic shadows, ultra-detailed, hyper-realistic, premium editorial photography, 8K quality. Don't change my face 2/2.`
+},
+{
+code:"BPR12",
+title:"Vector Art Illustration", 
+thumbnail:"Vector art.png", 
+prompt:`Create An Image Vector Art Illustration Of A Stylish South Indian Man ,On A Solid Black Background. 
+The Man Has A Modern Messy Hairstyle, Wearing Sunglasses, A Black Shirt, And A Stylish Chain. 
+use A High-contrast Color Palette Of Deep Yellow Red, Skin Tones, And Bright White Highlights.
+add Long Text Of "YOUR NAME" At Background. image Size Of 3:4.`
+},
+{
+code:"BPR13",
+title:"Editorial Poster", 
+thumbnail:"editorial poster.png", 
+prompt:`Vertical 3:4 magazine editorial poster. 
+Young Indian man, early 20s, standing center — wearing oversized graphic knit sweater in steel blue-grey, dark wide-leg trousers, hands in pockets, relaxed confident pose, direct soft gaze. 
+Deep crimson red background #C8102E. 
+Behind him: massive ultra-bold white "VIJAY" text in Bebas Neue filling full poster height, subject standing in front of it. 
+Thin white signature script "thalapathi" overlaid diagonally across the big letters in Great Vibes font. 
+Top-left: small white triangle logo + "DESIGNED BY VEL_FX_EDIT" in Montserrat Light. 
+Top-right: bold "CM" logo white. 
+Bottom: small centered white bio text in Montserrat Regular. 
+Soft studio lighting, slight bottom vignette. Sharp clear face. Face identity preserved. High-end CM magazine aesthetic. Instagram editorial poster style.`
+},
+
+  {
+    code:"BPR14",
+    title:"Man Eyes",
+    thumbnail:"Eye.jpg",
+    prompt:`A cinematic poster-style artwork featuring an intense close-up of a man's eyes centered horizontally across the frame. Only the eyes and part of the face are visible through a narrow horizontal strip, surrounded by deep black negative space above and below. The face is illustrated in a high-contrast, graphic-novel style with bold red, black, and orange tones, dramatic shadows, sharp highlights, and a gritty, intense mood.
+
+The eyes look fierce, emotional, and determined, with slightly messy hair.
+
+Use the provided image for eye reference
+
+4:3 Ratio.`
+  
+  },
+
+  {
+    code:"BPR15",
+    title:"Dramatic Cinematic Poster",
+    thumbnail:"dramatic cinematic.png",
+    prompt:`Create a dramatic cinematic minimalist poster** featuring a single male silhouette standing confidently in the center of the frame. The figure is backlit by an intense **golden-yellow spotlight, creating a strong, mysterious silhouette with no visible facial details. He is slightly saluting or shielding his eyes with one hand while walking forward. conveving confidence and leadership. Behind the silhouette, place a large five-pointed red star that dominates the composition. The star should have a distressed vintage texture with faded edges, creating a revolutionary propaganda poster aesthetic. Overlay the entire composition with oversized condensed bold typography reading "YOUR NAME" in tall uppercase block letters. The letters should be semi-transparent and textured, blending naturally into the background while remaining the dominant 3:4 Ratio.`
+  },
+
+  {
+    code:"BPR16",
+    title:"MT Bike",
+    thumbnail:"MT bike.png",
+    prompt:`A high-quality, professional portrait of a smiling young South Asian man with voluminous, textured black hair sitting on a white and orange KTM Duke 390 sport motorcycle. He is wearing an oversized black graphic t-shirt with text, distressed light-wash beige/grey jeans, and white sneakers with red accents. The motorcycle is parked on an asphalt road. The background features a beautifully blurred, out-of-focus setting with vibrant purple and pink bougainvillea flowers hanging from above, creating a smooth bokeh effect. Daylight lighting, sharp focus on the subject, captured with a DSLR camera, 85mm lens, photorealistic, cinematic look. 3:4.`
+  },
+
+  {
+    code:"BPR17",
+    title:"A Cute Minimalist Portrait Poster",
+    thumbnail:"minimalist portrait.png",
+    prompt:`A cute minimalist portrait of a young man sitting casually on the floor in a clean studio setting with a light grey background. he wears an oversized dark charcoal hoodie, cream straight-leg pants, white socks, and chunky white sneakers. Relaxed seated pose with crossed legs, one eye slightly closed in a playful wink and a soft smile. Behind her, a large black-and-white doodle character hugs her from behind, wrapping its cartoon arms around her shoulders and gently squeezing her cheek. 3:4 Ratio.`
+  },
+
+  {
+    code:"BPR18",
+    title:"Mass Tamil Text Banner",
+    thumbnail:"Mass Banner by-Vel_fx_edit.png",
+    prompt:`CREATE A WHITE COLOUR BACKGROUND AND THIS FOUR BOY IMAGES ORENGE THE COLLEGE STYLE AND THIS BOY IMAGES SHIRT COLOUR CHANGE IN SEM COLOUR AND SHARP FOUCS DIGITAL STYLE HD QUALITY LOOK SMOOTH STUDIO STYLE CLARITY ON ORGINAL FACE OIL PAINTING HAIRSTYLE LOOK'S FACE LOOK RED DIGITAL STYLE LOOK.THIS BANNER EDITING IMEGE IN CHANGE STUDIO STYLE CLARITY AND HD QUALITY AND ADD THE DOWN SIDE ADD THE TAMIL STYLISH DESIGN FONT ADD IN " บணம் தேவையில்லை.. பழக்கம் ஒன்றே போதும்.." WITH FINISHED FRAME SIZE MOVIE
+POSTER 3:4 SIZE PHOTO PLEASE CRAD BACKGROUND IS NEGATIVE SIDE NEGATIVE BACKGROUND DARK NEGATIVE LOOK FULL BACKGROUND BABY LOOK NOT WHITE BACKGROUND FULL BACKGROUND DAVID LOOK BACKGROUND NEGATIVE SPARTANS BACKGROUND GANG SPARTANS GANG NEGATIVE WAR LOOK BACKGROUND SPARTANS NEGATIVE WAR LOOK`
+  },
+
+  {
+    code:"BPR19",
+    title:"Neon Cyan And Yellow Rim Lighting Poster",
+    thumbnail:"neon cyan image.jpg",
+    prompt:`Convert this image into of a person (take reference face as uploaded image), face and pose keep it same as uploaded image, shirt(same as uploaded image), neon cyan and yellow rim lighting glow, glossy skin (keep the face details same as uploaded image)highlights, background(use uploaded image background), ultra-realistic digital painting, cinematic lighting, sharp focus. Use my uploaded pictures as a reference do not change face.`
+  },
+
+  {
+    code:"BPR20",
+    title:"Dark Grey Stone Throne",
+    thumbnail:"Stonethrone.png",
+    prompt:`A HIGH-QUALITY CINEMATIC PORTRAIT OF A TAMILNADU MAN SITTING ON A HEAVY, ANCIENT-LOOKING DARK GREY STONE THRONE, MESSY HAIR, GAZE B0° DIRECTLY AT THE CAMERA. HE IS WEARING A CRISP, WHITE BUTTON-DOWN SHIRT WITH THE TOP BUTTONS UNDONE, REVEALING A HINT OF HIS CHEST, AND THE SLEEVES ARE ROLLED UP CASUALLY TO HIS FOREARMS. HE WEARS LOOSE-FITTING KHAKI OR LIGHT BEIGE TROUSERS, CUFFED AT THE ANKLES. ON HIS FEET ARE THICK-STRAPPED BROWN LEATHER OPEN-TOE SANDALS. HE RIGHT WRIST AND A SILVER RING ON HIS RIGHT INDEX FINGER. HIS POSTURE IS RELAXED YET AUTHORITATIVE; HIS RIGHT LEG IS CASUALLY CROSSED WITH THE ANKLE RESTING OVER HIS LEFT KNEE, AND BOTH ARMS ARE RESTING COMFORTABLY ON THE ROUGH STONE ARMRESTS OF THE CHAIR.
+BACKDROP.THE BACKGROUND IS A MOODY, MOTTLED DARK GREY STUDIO LOW-LYING, WISPY ATMOSPHERIC SMOKE OR FOG GATHERS AROUND HIS FEET AND THE BASE OF THE STONE CHAIR. THE LIGHTING IS DRAMATIC AND CINEMATIC, WITH SOFT DIRECTIONAL LIGHT HIGHLIGHTING`
+  },
+  {
+    code:"BPR21",
+    title:"Streetwear Altitude Poster",
+    thumbnail:"Streetwear.png",
+    prompt:`Use the uploaded photo as the exact face reference (100% facial resemblance)
+Hyper-realistic cinematic streetwear attitude poster of a stylish young Indian man wearing an oversized white t-shirt, black trousers, white sneakers, black sunglasses, and a smartwatch, shown in a premium three-pose collage with folded-arms portrait, rear-view “EXPLORE” eagle graphic t-shirt, and sitting on a glossy black Royal Enfield Classic motorcycle.
+Massive distressed “FEARLESS” typography, handwritten “Attitude” script, inspirational quote, white grunge wall with black ink splashes, wet reflective floor, golden-hour studio lighting, editorial fashion photography, ultra-detailed skin texture, HDR, shallow depth of field, photorealistic, 16K UHD, luxury magazine cover, commercial advertising quality.`
+  },
+
+  { 
+   code:"BPR22",
+    title:"Jana Nayagan Poster",
+    thumbnail:"Jana Nayagan Poster.png",
+    prompt:`Create a cinematic movie theatre exterior at golden sunset with a dramatic glowing sky, colorful confetti, and wet reflective pavement. Keep the same luxury theatre entrance with three giant illuminated Thalapathy Vijay “Jana Nayagan” posters (center poster larger than the two side posters). Keep the glowing golden “ONE LAST TIME” marquee below the posters. Place a young man in the foreground wearing a white linen shirt, beige chinos, white sneakers, gold chain, and wristwatch, standing in the exact same pose with both arms stretched wide, facing the camera and smiling confidently. Maintain the same composition, camera angle, lighting, reflections, HDR, ultra-realistic, blockbuster movie poster style, symmetrical framing, 35mm wide-angle lens, shallow depth of field, 8K. Size in 4:5.`
+  },
+
+    { 
+   code:"BPR23",
+    title:"Jana Nayagan First Show",
+    thumbnail:"Jana Nayagan First Show.png",
+    prompt:`Ultra-realistic 8K cinematic vertical portrait (9:16) of a joyful young South Indian man celebrating the “JANANAYAGAN – FIRST DAY FIRST SHOW” outside a massive cinema theater during a grand FDFS celebration. The young man stands confidently in the foreground wearing a stylish black full-sleeve shirt with rolled-up sleeves, black jeans, a thin gold chain, bracelet, and a small forehead tilak. He has a bright smile, looking directly at the camera. His left hand is raised high with the index finger pointing upward, while his right hand holds a genuine cinema ticket very close to the camera, making it the secondary focal point. The ticket is perfectly sharp, large, fully visible, front-facing, readable, and in crystal-clear focus, with realistic printed text, QR code, seat number, booking details, movie title, show timing, date, screen number, booking ID, barcode, and theater branding. The ticket occupies enough space in the frame to be easily readable without distortion or blur. Behind him, an enormous JANANAYAGAN – FIRST DAY FIRST SHOW illuminated theater entrance glows with warm golden lights. A gigantic cutout of the hero towers above the theater, surrounded by massive movie banners and posters. Thousands of excited fans celebrate with colorful confetti explosions, waving flags, beating traditional drums, dancing, cheering, and raising their hands. Golden-hour sunlight creates dramatic cinematic rim lighting, volumetric sun rays, floating confetti, realistic crowd depth, shallow depth of field, HDR lighting, ultra-detailed skin texture, natural facial expression, DSLR photography look, Canon EOS R5, RF 85mm f/1.2L lens, f/1.8 aperture, vibrant cinematic color grading, hyper-realistic textures, photorealistic quality, ultra-sharp focus, festival atmosphere, blockbuster movie celebration, the face and the cinema ticket are both in perfect focus, with the ticket clearly legible and prominently displayed. No blur, no cropped ticket, no hidden fingers, no watermark, no extra hands, no text distortion, no AI artifacts.`
+  },
+
+
+];
+  
+
+const girlPrompts = [
+{
+code:"GPR01", 
+title:"Girl Karuppu Poster", 
+thumbnail:"Girl Ai prompt thumnail1.jpeg", 
+prompt:`ULTRA-REALISTIC 8K CINEMATIC TAMIL MOVIE POSTER OF A STYLISH YOUNG SOUTH INDIAN WOMEN SITTING CENTRALLY ON ROUGH STONE STEPS IN A POWERFUL, DOMINANT POSE. 
+USE THE EXACT FACE FROM THE UPLOADED IMAGE WITH HIGHLY ACCURATE FACE RESEMBLANCE, NATURAL SKIN TEXTURE, SHARP JAWLINE, REALISTIC EYES, CLEAN FACIAL DETAILS, SHORT STYLISH HAIR VISIBLE CLEARLY FROM THE FRONT, HAIR NOT COVERING THE FOREHEAD, PROPER HEAD ALIGNMENT, NATURAL EXPRESSION, AND CINEMATIC LIGHTING ON THE FACE. 
+HE WEARS A DARK MAROON FULL-SLEEVE SHIRT WITH ROLLED-UP SLEEVES AND A DARK GREEN DHOTI WITH GOLDEN BORDER. 
+ONE LEG IS PLACED HIGHER ON THE STEP WITH A MASS LEADER ATTITUDE. 
+HE LOOKS SLIGHTLY SIDEWAYS WITH A SERIOUS, INTENSE EXPRESSION AND A WATCH. 
+SURROUNDING HIM ARE FOUR TERRIFYING KARUPPU SAMI DEVOTEES. 
+THEIR BODIES ARE COMPLETELY PAINTED MATTE CHARCOAL BLACK WITH HYPER-DETAILED SKIN TEXTURE. 
+THEIR FACES HAVE AGGRESSIVE WHITE AND RED CEREMONIAL PAINT WITH LARGE EYES, SHARP TEETH, AND LONG TONGUES STICKING OUT. 
+THEY WEAR HUGE GARLANDS MADE OF YELLOW LEMONS, MARIGOLDS, RUDRAKSHA BEADS, AND SILVER ANKLE BELLS. 
+EACH HOLDS A MASSIVE CURVED SILVER ARUVAL UPRIGHT. 
+TWO SIT BESIDE THE HERO ON LOWER STEPS AND TWO STAND BEHIND HIM IN AN INTIMIDATING PROTECTIVE FORMATION. 
+BACKGROUND FILLED WITH BLOOD-RED MIST, FIRE EMBERS, TEMPLE ATMOSPHERE, DARK SHADOWS, VOLUMETRIC RED FOG, CINEMATIC DUST PARTICLES, AND EPIC CONTRAST. 
+A HUGE STONE STATUE OF A DEITY RIDING A HORSE IS VISIBLE IN THE BACKGROUND THROUGH THE RED SMOKE. 
+ADD TEMPLE TRIDENTS, FIRE TORCHES, AND TRADITIONAL TAMIL FOLK ELEMENTS FOR A DIVINE MASS LOOK. 
+DRAMATIC MOODY LIGHTING, HYPER-DETAILED FABRIC TEXTURES, EPIC SCALE COMPOSITION, CINEMATIC RED-AND-BLACK COLOR GRADING, ULTRA SHARP DETAILS, DEPTH OF FIELD, HIGH CONTRAST, MOVIE POSTER STYLE. 
+AT THE BOTTOM CENTER, ADD LARGE STYLIZED TAMIL TITLE TEXT “கருப்பு” IN A METALLIC GOLDEN COLOR WITH BRUSHSTROKE CALLIGRAPHY STYLE, GLOWING EDGES, AND CINEMATIC SHADOW. 
+VERTICAL POSTER, 3:4 ASPECT RATIO, ULTRA-HD, MASTERPIECE QUALITY, CINEMATIC COMPOSITION, REALISTIC FACE SWAP, PROFESSIONAL MOVIE POSTER FINISH.`
+},
+{
+code:"GPR02", 
+title:"Gaughter amma Prompt", 
+thumbnail:"Girl Ai prompt thumnail2.jpeg", 
+prompt:`traditional styling. 
+The daughter stands closely beside her with a loving arm around her shoulder, wearing a beautiful white and gold salwar suit (white chudi with elegant golden embroidery and detailing), long soft hair, natural makeup, graceful expression, and genuine family warmth. 
+Dark warm brown gradient studio background, professional softbox lighting, golden-hour rim light, soft shadows, creamy depth of field, ultra realistic skin details, cinematic brown and gold color grading, premium family portrait photography style, emotional bonding, clean centered composition, 85mm lens look, shallow depth of field, realistic fabric textures, warm cozy atmosphere, luxury portrait aesthetic, studio-quality retouching, elegant Tamil typography on left side saying “நான் பார்த்த முதல் முகம் நீ நான் கேட்ட முதல் குரல் நீ” in stylish golden calligraphy with decorative ornaments, 8K ultra realistic, timeless emotional portrait, 3:4 aspect ratio.`
+},
+{
+code:"GPR03", 
+title:"Cm Girl prompt", 
+thumbnail:"Girl Ai prompt thunail3.jpeg", 
+prompt:`A highly realistic cinematic photograph of a young woman (use the uploaded face exactly, do not alter facial features, identity, or proportions) standing beside a Chief Minister JOSEPH VIJAY seated at an official government desk of Chief Minister seat. 
+The Chief Minister VIJAY resembles a charismatic South Indian leader wearing a crisp white shirt, sitting in a premium leather chair, smiling warmly while receiving a bouquet of flowers. Vijay is looking at the young woman. 
+The young woman is standing respectfully on the right side, wearing a clean white chudi (salwar suit), giving a polite humble smile, slightly leaning forward while handing over a colorful bouquet. The woman is looking at the camera with a light smile. 
+Background features a luxurious government office setup with wooden panels, official desk, Indian flags on both sides, and a large "Government of Tamil Nadu" emblem on the wall behind. 
+Final art 100% same face structure, 3:4 aspect ratio.`
+},
+{
+code:"GPR04", 
+title:"Girl Ai Prompt", 
+thumbnail:"Girl Ai prompt thumnail4.jpeg", 
+prompt:`“A young Indian man sitting on a stool, wearing a beige hoodie and black pants, calm confident expression, surrounded by multiple cute mini cartoon versions of himself in different poses (sitting, climbing rope, taking photos, waving, using phone), warm yellow-orange gradient background, modern motivational poster style, soft cinematic lighting, highly detailed face, 3D cartoon characters, depth of field, aesthetic composition, books stacked beside him (self-improvement theme), notebook on floor 3:4`
+},
+{
+code:"GPR05", 
+title:"Portrait Girl", 
+thumbnail:"jsghj.jpg", 
+prompt:`Create image Ultra-realistic masterpiece portrait of a beautiful 20-year-old South Asian girl, unmarried youthful appearance, wearing a luxurious royal blue saree with subtle shimmer and intricate silver embroidery, matching embroidered blouse, elegant and graceful styling, long straight silky dark brown hair flowing naturally with soft wind movement, a few delicate strands falling across her face, smooth glowing fair skin with natural texture, 3:4 Ratio.`
+},
+{
+code:"GPR06", 
+title:"Dreamy cinematic portrait collage poster", 
+thumbnail:"girlportraitcollage.jpg", 
+prompt:`A dreamy cinematic portrait collage poster of a beautiful young girl. 
+The background is a deep aesthetic purple gradient with soft glowing light rays, dreamy haze, abstract floral textures, and cinematic bokeh lighting. 
+The composition features multiple black-and-white polaroid-style portrait frames floating around the main subject in different angles and positions, creating a stylish scrapbook collage effect. 
+Each side portrait shows different expressions and poses of the same young girl with soft monochrome tones and realistic contrast. 
+Add glowing lavender light behind the subject, soft bloom effects, subtle lens flare, misty atmosphere, smooth gradients, and a premium Instagram-style aesthetic. 
+The overall mood is elegant, emotional, modern, and artistic with shallow depth of field and cinematic color grading in purple, pink, and white tones. 
+Ultra-detailed, high resolution, DSLR quality, editorial fashion poster style, soft shadows, realistic skin texture, centered composition, aesthetic social media poster design, 8K quality Poster down side added text Butterfly text size is small size. font use a brush font, and white cursive font added Little prince, overall poster ratio is 3:4.`
+},
+{
+code:"GPR07", 
+title:"A sophisticated four-panel fashion photography collage", 
+thumbnail:"fashionphotographycollage.jpg", 
+prompt:`A sophisticated four-panel fashion photography collage featuring a young woman in an alternative colorway of the floral saree. 
+a sheer cream base adorned with vibrant blue and green botanical prints. 
+The left main panel shows a medium.full body shot of the woman in a similar elegant standing pose with soft, dappled daylight shadows.She is adjusting her hair, revealing the full print on the pallu and body. 
+3:4 Ratio.`
+},
+{
+code:"GPR08", 
+title:"Typographic Portrait Girl", 
+thumbnail:"Typographic irlspic.jpg", 
+prompt:`A striking typographic portrait of a young woman with a thoughtful three-quarters gaze, completely rendered in a text-mosaic and word-cloud style. 
+Her entire form-skin, hair, and clothing-is GENAN KHAT constructed from varied typography, headlines, and the words "ENERGY", "LOVE", "MONEY", "INNOCENT", and "SUCCESS". 
+Bold serif and sans-serif fonts define the heavy contours of her neck and jawline, while fine delicate cursive and micro-text create the subtle midtones and highlights of her face. 
+His lips are a distinct Avibrant red, made of textured text. 
+The edges of her hair and torso gently dissolve into a chaotic dispersion of fragmented letters and ink splatters. 
+Background is stark white, layered with faint vintage handwritten script and blurred newspaper print. 
+High contrast, layered multimedia collage, sharp detail, artistic graphic design --ar 3:4.`
+},
+{
+code:"GPR09", 
+title:"Double Exposure Poster", 
+thumbnail:"double exposure poster.jpg", 
+prompt:`Create a Cinematic double-exposure poster of the uploaded person, identity100% preserved same person wearing a same monochrome large his face looking into the distance close-up portrait in background smile face,smallest full-body girl she is standing same face upload image smile face, wearing dressed in a traditional Blue and white half-saree; a blue pleated 'davani'(drape)with traditional temple-border embroidery in gold and black is paired with a gold-embroidered. 
+Ar 3:4 Add a signature'YOUR NAME' in the right bottom.`
+},
+{
+code:"GPR10", 
+title:"Premium Scrapbook-style Ethnic Portrait Collage Poster", 
+thumbnail:"scrapbook style college portrait.jpg", 
+prompt:`Create a premium scrapbook-style ethnic portrait collage poster using the uploaded photo as the face reference. 
+Keep the face unchanged and highly realistic. Design a dual-photo layout with: 
+• Top section: close-up smiling portrait 
+• Bottom section: graceful over-the-shoulder saree portrait 
+• Smooth flowing curved white divider between both images 
+Outfit: • Olive-green blouse • Elegant black floral saree with golden embroidered border • Golden jhumka earrings • Jasmine flowers in hair • Long wavy black hair 
+Style: • Luxury fashion editorial photography • Warm cinematic golden-hour lighting • Soft sunlight on face • Creamy bokeh background • Vintage alleyway street backdrop • Rich brown and gold color grading • Realistic skin texture • HDR quality • Ultra-detailed photorealism • 85mm lens look • Shallow depth of field 
+Decorative Elements: • Vintage scrapbook paper textures • Elegant floral corner decorations • Beige and cream roses • Subtle handwritten script textures • Small heart doodles • Soft vignette • Premium Instagram poster aesthetic 
+Typography: • Large stylish 3D cursive name text at bottom • Text: "YOUR NAME" • Olive-gold gradient lettering • Elegant shadow and glossy finish • Luxury signature-style typography 
+Quality: • 8K Ultra HD • Masterpiece quality • Hyper realistic • Professional portrait retouching • Sharp facial details • Cinematic depth • High-end poster design 
+Aspect Ratio: 3:4 Plain text. 
+Use the uploaded woman's exact face, smile, facial structure, skin tone, eyes, nose, and expression without alteration. 
+Preserve identity perfectly while transforming only the outfit, hairstyle styling, background, and poster composition..`
+},
+{
+code:"GPR11",
+title:"Bridal Poster",
+thumbnail:"Bridal poster.jpg",
+prompt:`realistic cinematic bridal poster of a beautiful Indian WOMAN(USE REFERENCE IMAGES FOR 100% FACIAL ACCURACY) WEARING A LUXURIOUS magenta lehenga saree with intricate gold embroidery, RUBY AND GOLD JEWELRY, SEATED gracefully in the center, warm smile, voluminous no cleavage dramatic collage COMPOSITION WITH FIVE MONOCHROME PORTRAITS OF THE SAME WOMAN SURROUNDING HER, LARGE FADED EYES IN background, crimson red color grading, dark moody atmosphere, MOVIE POSTER AESTHETIC, HIGH contrast lighting, floating PARTICLES, SUBTLE, 8K. 3:4.`
+},
+{
+code:"GPR12",
+title:"College Admissions",
+thumbnail:"College Admission.jpg",
+prompt:`Create a modern and cinematic graphic design poster for college admissions. Use a large soft-focus portrait of a smiling Indian girl in traditional saree as the background, looking sideways naturally. Add a full-body cutout of the same girl standing in front wearing a stylish white saree with colorful floral patterns. Place huge cracked stone-text typography in the center with the word "YOUR NAME". Background should have watercolor texture, floral elements, soft greenery, and warm sunlight tones for a dreamy aesthetic. Add professional creative design vibes with depth, shadows, and photo manipulation effects. Add text: "Butterfly queen" in elegant handwritten typography at the bottom-right. Poster style should look premium, realistic, eye-catching, and suitable for social media promotion. Aspect ratio: portrait 3:4.`
+},
+
+  {
+    code:"GPR13",
+    title:"Soft Pink Ethnic Kurti",
+    thumbnail:"soft pink ethnic kurti.jpg",
+    prompt:`Create image > Premium poster featuring a young Indian woman ( use reference images for 100% facial accuracy) in a soft pink ethnic kurti with a matching dupatta, smiling gently and looking slightly to the side. Large elegant teal serif typography reading "Your name" in the background on a textured white paper backdrop. Minimal pastel floral decorations including a pink hibiscus, blue forget-me-not flowers, delicate white baby's breath, a soft pink butterfly, tiny heart doodles, and subtle watercolor accents. Add handwritten pink script text "Butterfly", clean editorial layout, soft natural lighting, premium Instagram aesthetic, high detail, realistic skin tones, elegant composition, luxury greeting card style, 3:4 aspect ratio.`
+  },
+
+  {
+    code:"GPR14",
+    title:"Purple-Glow Portrait Poster",
+    thumbnail:"purple-glow.jpg",
+    prompt:`Dreamy cinematic purple-glow portrait poster of a beautiful Indian woman wearing an elegant black embroidered saree with silver detailing, standing gracefully and looking directly at the camera. Soft lavender neon typography in the background displaying glowing title text "Your name", glowing text in some others font like long and thin type, and text glowing is low, and text up side small letter in white silver text in BUTTERFLY modern editorial poster design. Purple flowers in the foreground creating depth and framing the composition. Ethereal haze, soft bloom effect, glowing rim light around the subject, pastel lavender and violet color palette, creamy highlights, shallow depth of field, blurred luxury interior background, cinematic lighting, soft focus, volumetric glow, high-end fashion magazine aesthetic, ultra-detailed face, smooth skin tones, elegant jewelry, dreamy atmosphere, premium album-cover style, photorealistic, 4K quality, HDR, professional color grading, soft bokeh, fantasy-inspired lighting, vertical poster composition (3:4)`
+  },
+
+  {
+    code:"GPR15",
+    title:"Dreamy Birthday Collage Poster",
+    thumbnail:"dreamy birthday poster.jpg",
+    prompt:`Ultra-photorealistic dreamy birthday collage poster inspired by nostalgic friendship edits, soft Gen-Z scrapbook aesthetics, emotional social-media birthday tributes, and cinematic memory storytelling. The composition should feel warm, innocent, emotionally comforting, and visually poetic — like a heartfelt birthday edit created from precious candid memories of someone deeply loved. At the center of the composition is a young girl standing naturally with eyes gently closed and a peaceful soft smile, creating a calm emotionally pure atmosphere. Her body posture feels shy, relaxed, and candid — like an authentic unposed memory captured during a peaceful moment. The central portrait should feel emotionally grounding and visually dominant within the collage. The subject is wearing a sleeveless pink floral-patterned top with soft pastel detailing and realistic cotton fabric texture. A realistic student ID card hangs naturally around the neck with believable fabric folds, subtle movement, and authentic everyday realism. Hair is tied back casually into a ponytail with natural flyaway strands, soft sunlight reflections, and realistic texture. The collage layout includes multiple faded memory-style portraits softly blended into the background around the central subject. These surrounding images depict candid smiling moments, casual outdoor interactions, warm nostalgic expressions, and soft lifestyle photography moments. The surrounding portraits should appear semi-transparent and dreamy, layered like emotional memories fading into the background. The overall background uses warm peach, cream, beige, and golden tones blended softly together with a dreamy glow effect. Add subtle textured grid patterns, faded light leaks, atmospheric haze, and delicate blur transitions to create a nostalgic emotional atmosphere. The collage should feel handmade and emotionally personal rather than perfectly polished. Decorative scrapbook-style elements are scattered around the composition including: soft butterfly stickers, dreamy planet doodles, hand-drawn aesthetic illustrations, subtle floral overlays, faded paper textures, pastel glow accents, and minimal whimsical graphics. These elements should feel delicate and emotionally expressive without overpowering the portrait. The central portrait is outlined using a soft white cutout border effect, creating a layered scrapbook-photo aesthetic. The white outline should feel slightly organic and realistic like hand-cut printed photos placed onto a digital memory board. Lighting & atmosphere: Warm cinematic daylight with soft peachy highlights, dreamy glow, gentle bloom, nostalgic haze, and subtle ambient softness. The atmosphere should feel emotionally safe, youthful, affectionate, and memory-driven — like revisiting old happy moments. Typography & graphic design: At the bottom of the composition, elegant oversized typography reads: “HAPPY BIRTHDAY” using a decorative modern serif font in pastel teal-blue tones. Beneath it, smaller handwritten script typography reads: “ Your name ” with elegant flowing calligraphy styling. Typography should feel integrated naturally into the poster design with premium social-edit aesthetics. Facial realism & skin details: Natural youthful skin texture with visible pores, subtle blush tones, realistic facial softness, believable imperfections, natural lips, soft eye shadows, and authentic emotional warmth. No AI beauty smoothing, no plastic skin, no exaggerated glamour makeup. Maintain grounded human realism. Camera & photography style: Shot on Sony A7 IV or Canon EOS R5, 50mm lifestyle portrait lens, shallow depth of field, ultra-soft cinematic focus, realistic HDR photography, subtle analog grain, dreamy social-media aesthetic, emotionally immersive portrait realism. Composition details: Vertical mobile-wallpaper composition, central cutout portrait layered over dreamy memory collage background, balanced scrapbook decorations, soft negative space at bottom for typography, warm pastel storytelling aesthetic, emotionally nostalgic social-edit layout. Style keywords: ultra photorealistic, dreamy birthday collage, nostalgic scrapbook aesthetic, cinematic memory poster, soft Gen-Z social edit, emotional friendship tribute, pastel glow atmosphere, realistic candid portrait, whimsical doodle elements, butterfly stickers, dreamy warm tones, cinematic social-media design, soft feminine aesthetic, layered memory collage, realistic skin texture, emotional birthday poster, handwritten typography, aesthetic lifestyle photography, heartfelt nostalgic storytelling, premium Instagram birthday edit. 3:4 ratio.`
+  },
+
+  {
+    code:"GPR16",
+    title:"high-end digital illustration poster",
+    thumbnail:"high-end digital illustration poster.jpg",
+    prompt:`Create a high-end digital illustration poster featuring the uploaded girl transformed into a confident, stylish fashion icon. Preserve her facial features and identity while rendering her in a clean, modern vector-painting style with smooth brushwork, bold outlines, rich shading, and premium editorial artwork quality. Pose her in a powerful and elegant stance: body slightly angled, shoulders relaxed, head tilted upward with a confident, fearless expression. Maintain a poised posture with arms naturally positioned near the body, creating a calm yet dominant presence. The overall attitude should convey independence, confidence, elegance, and self-assurance. Style her with voluminous shoulder-length wavy black hair, naturally flowing with realistic texture and movement. Add oversized round black sunglasses with thin metallic frames, reflecting subtle ambient light. Dress her in a vibrant mustard-yellow saree draped gracefully over a sleeveless black blouse. The saree should feature realistic folds, fabric texture, and elegant draping that enhances the fashion-forward look. Background: a solid rich mustard-yellow backdrop with a soft textured gradient and minimal artistic grain. Keep the background completely clean and uncluttered with no objects, patterns, logos, watermarks, borders, captions, quotes, typography, or text elements of any kind. Lighting should be soft and cinematic, creating warm highlights on the skin and realistic depth in the hair, clothing, and accessories. Use a modern fashion-poster composition with the subject positioned slightly toward the lower-right portion of the frame, leaving generous negative space around her for a premium minimalist aesthetic. Ultra-detailed digital painting, editorial fashion illustration, luxury magazine cover quality, crisp linework, smooth color transitions, realistic facial rendering, elegant color harmony, high contrast, professional artwork, sophisticated mood, 4K resolution, vertical 3:4 aspect ratio, sharp focus, premium contemporary poster design.`
+  },
+
+  {
+    code:"GPR17",
+    title:"Blue Floral Saree",
+    thumbnail:"Blue Floral Saree.png",
+    prompt:`Generate a hyper-realistic, cinematic portrait of the uploaded beautiful woman standing gracefully in a garden filled with vibrant blue bougainvillea flowers. She is wearing an elegant, light blue colored floral saree with intricate patterns, paired with a matching blouse, blue handmade two bangles, blue jhumka earrings. Her hair is styled in a soft, messy updo adorned with matching blue flowers. She is looking slightly away from the camera with a gentle, serene expression. The lighting is soft and golden, creating a dreamy, romantic atmosphere. Captured with an 85mm lens, f/1.8 aperture for a beautiful shallow depth of field, 8K resolution, photorealistic, highly detailed. Maintain the face same as the uploaded photo. Aspect ratio 4:5`
+  },
+
+  {
+    code:"GPR18",
+    title:"vertical college",
+    thumbnail:"vertical college.png",
+    prompt:`Create a hyper-realistic cinematic vertical portrait of a beautiful young South Indian woman wearing an elegant teal-blue Kanchipuram silk saree with luxurious golden zari borders. She has naturally glowing brown skin, long silky black hair decorated with fresh jasmine flowers (gajra), a small black bindi, expressive dark brown eyes, thick eyebrows, long eyelashes, soft natural bridal makeup, a warm genuine smile, luxurious traditional gold jhumka earrings, delicate gold bangles, and subtle traditional jewelry.
+
+The image is divided into five perfectly aligned horizontal cinematic strips with no spacing between them, creating a premium editorial collage.
+
+Strip 1 (Top): A close-up portrait of the woman smiling gracefully while looking slightly to the right. Her face is beautifully lit with warm cinematic lighting, showcasing glowing skin, natural smile, jasmine flowers, and elegant earrings. Soft creamy bokeh fills the background.
+
+Strip 2: A macro cinematic close-up focusing on her gold jhumka earring, neck, loose hair strands, and warm golden light reflecting from the jewelry. Extremely shallow depth of field with premium cinematic bokeh.
+
+Strip 3: An ultra-detailed extreme close-up of only her eyes, eyebrows, eyelashes, forehead, and black bindi. Sharp focus on the eyes with dramatic cinematic lighting, rich contrast, and beautiful catchlights.
+
+Strip 4: A close-up of the jasmine flowers woven into her long black hair from the back side, showing detailed flower texture with warm ambient lighting and smooth background blur.
+
+Strip 5 (Bottom): A close-up of both hands gently folded together on her lap while wearing elegant gold bangles. The luxurious teal-blue silk saree with intricate golden zari embroidery should be clearly visible with realistic fabric texture.
+
+Maintain perfect facial continuity across every strip so it is clearly the same woman. Every strip should feel like scenes from the same cinematic film. Premium South Indian bridal aesthetic, luxury editorial photography, realistic skin texture, HDR, ultra photorealistic, masterpiece, ultra-detailed, 8K resolution, cinematic color grading, warm golden lighting, shallow depth of field, soft background bokeh, natural colors, symmetrical composition, professional fashion photography, award-winning portrait, razor-sharp focus.
+
+At the bottom-right corner, add elegant white Tamil typography with a soft glow. Display this exact Tamil quote without any spelling mistakes:
+
+"அழகு என்பது
+கண்களில் மட்டும் இல்லை,
+அது நெஞ்சிலும் வசிக்கிறது."
+
+The Tamil text should be clean, premium, readable, and beautifully integrated into the portrait.`
+  },
+
+  {
+    code:"GPR19",
+    title:"Black-and-White Cinematic Portrait Collage",
+    thumbnail:"Black-and-White.png",
+    prompt:`Ultra-realistic black-and-white cinematic portrait collage, 5 horizontal film-strip panels featuring a young woman with a natural smile, soft dimples, elegant lips, graceful neck, expressive eyes, and side-profile portrait. Long dark hair, embroidered white outfit, shallow depth of field, creamy bokeh, monochrome fine-art photography, soft diffused lighting, 85mm lens, f/1.8, editorial fashion style, luxury magazine aesthetic, ultra-detailed, 8K, vertical 9:16.`
+  },
+
+  {
+code:"GPR20",
+    title:"Modern Mixed-media Graphic Design",
+    thumbnail:"Modern Mixed-media Graphic Design.png",
+    prompt:`Create a modern mixed-media graphic design, lmpressionistic Multi Exposure poster featuring a stylish young woman(character in the uploaded photo, no alternate). The central focus is the woman with long brunette dark black hair, wearing a traditional multi coloured saree(lehanga style), in standing shoulder pop pose. The background consists of a large, faded, pale blue and white halftone dot-patterned portrait of her face looking upward.
+Scattered around the composition are two horizontal rectangular panels with thin cyan borders, showing close-up images of her eyes. On the right side, large, bold, cyan 3D block letters reads “YOUR NAME” are stacked. A white, elegant cursive signature reads “Your name” is layered across the center of the image.`
+  },
+      
+  
+    ];
+
+/* ENGINE LOGIC */
+function displayVideos(list){
+const results = document.getElementById("videoResults");
+results.innerHTML = "";
+list.forEach(video => {
+results.innerHTML += `
+<div class="card">
+<img src="${video.thumbnail}">
+<div class="card-content">
+<h2>${video.code}</h2>
+<p>${video.title}</p>
+<a class="open-btn" href="${video.link}" target="_blank">OPEN PROJECT</a>
+</div>
+</div>
+`;
+});
+}
+
+function displayPrompts(list, targetElementId){
+const results = document.getElementById(targetElementId);
+results.innerHTML = "";
+list.forEach(prompt => {
+results.innerHTML += `
+<div class="card">
+<img src="${prompt.thumbnail}">
+<div class="card-content">
+<h2>${prompt.code}</h2>
+<p>${prompt.title}</p>
+<textarea id="${prompt.code}" class="prompt-box" readonly>${prompt.prompt}</textarea>
+<button class="copy-btn" onclick="copyPrompt('${prompt.code}')">COPY PROMPT</button>
+</div>
+</div>
+`;
+});
+}
+
+function refreshAllSections(videoSrc, bothSrc, boySrc, girlSrc) {
+displayVideos(videoSrc);
+displayPrompts(bothSrc, "bothPromptResults");
+displayPrompts(boySrc, "boyPromptResults");
+displayPrompts(girlSrc, "girlPromptResults");
+}
+
+function searchItems(){
+let input = document.getElementById("searchInput").value.toUpperCase();
+if(input === ""){
+refreshAllSections(videos, bothPrompts, boyPrompts, girlPrompts);
+return;
+}
+const filteredVideos = videos.filter(v => v.code.toUpperCase().includes(input) || v.title.toUpperCase().includes(input));
+const filteredBoth = bothPrompts.filter(p => p.code.toUpperCase().includes(input) || p.title.toUpperCase().includes(input));
+const filteredBoys = boyPrompts.filter(p => p.code.toUpperCase().includes(input) || p.title.toUpperCase().includes(input));
+const filteredGirls = girlPrompts.filter(p => p.code.toUpperCase().includes(input) || p.title.toUpperCase().includes(input));
+refreshAllSections(filteredVideos, filteredBoth, filteredBoys, filteredGirls);
+}
+
+function copyPrompt(id){
+const text = document.getElementById(id);
+navigator.clipboard.writeText(text.value);
+alert("Prompt Copied!");
+}
+
+/* INTERACTIVE DYNAMIC COLOR THEME CONTROLLER ENGINE */
+const themesList = ["cyberpunk", "royal", "emerald", "crimson"];
+let currentThemeIndex = 0;
+
+function toggleTheme() {
+  currentThemeIndex = (currentThemeIndex + 1) % themesList.length;
+  const activeTheme = themesList[currentThemeIndex];
+  
+  if (activeTheme === "cyberpunk") {
+    document.documentElement.removeAttribute("data-theme");
+  } else {
+    document.documentElement.setAttribute("data-theme", activeTheme);
+  }
+}
+
+// Initialize Render Call
+refreshAllSections(videos, bothPrompts, boyPrompts, girlPrompts);
+</script>
+</body>
+</html>
